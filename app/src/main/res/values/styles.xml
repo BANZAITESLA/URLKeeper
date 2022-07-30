@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 30/07/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6 -->
+
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight">
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+</resources>
