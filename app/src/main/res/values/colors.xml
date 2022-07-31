@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<!-- 30/07/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6 -->
+
 <resources>
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
@@ -8,10 +11,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="base">#F5F5F5</color>
+    <color name="base">#FFFCF3</color>
     <color name="coral">#CF6247</color>
     <color name="brown">#E2B848</color>
     <color name="cc">#DCDAB5</color>
     <color name="green">#74AD8F</color>
     <color name="japan">#1E3848</color>
+    <color name="japan90">#E61E3848</color>
 </resources>
