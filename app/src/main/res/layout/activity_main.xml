@@ -12,7 +12,8 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        app:layout_constraintBaseline_toTopOf="@+id/bottomNavigationView">
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -25,11 +26,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
 
-                app:title="@string/app_name"
-                app:titleCentered="true"
-
                 app:menu="@menu/top_bar"
-                app:navigationIcon="@drawable/ic_gear_solid" />
+                app:navigationIcon="@drawable/ic_gear_solid"
+                app:navigationIconTint="@color/japan90"
+
+
+                app:title="@string/app_name"
+                app:titleTextColor="@color/japan"
+                app:titleCentered="true" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -42,10 +46,13 @@
             <FrameLayout
                 android:id="@+id/frame_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
 
+                android:background="@color/base"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+
+                android:layout_margin="20dp"/>
 
         </androidx.core.widget.NestedScrollView>
 

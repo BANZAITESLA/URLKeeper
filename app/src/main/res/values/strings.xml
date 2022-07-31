@@ -4,4 +4,5 @@
     <string name="categories">Categories</string>
     <string name="manager">URL Manager</string>
     <string name="profile">Profile</string>
+    <string name="search">Search Title or URL</string>
 </resources>

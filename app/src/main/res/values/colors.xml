@@ -16,6 +16,8 @@
     <color name="brown">#E2B848</color>
     <color name="cc">#DCDAB5</color>
     <color name="green">#74AD8F</color>
+    <color name="green90">#E674AD8F</color>
+    <color name="green80">#CC74AD8F</color>
     <color name="japan">#1E3848</color>
     <color name="japan90">#E61E3848</color>
 </resources>
