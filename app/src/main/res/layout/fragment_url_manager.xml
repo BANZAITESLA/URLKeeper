@@ -9,32 +9,57 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.UrlManagerFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textField"
-
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent">
 
-        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
-        app:endIconMode="custom"
-        app:endIconDrawable="@drawable/ic_magnifying_glass_solid"
-        app:endIconContentDescription="@string/search"
 
-        app:boxBackgroundColor="@color/green80"
-        app:boxStrokeColor="@color/japan"
-
-        android:hint="@string/search"
-        android:textColorHint="@color/japan"
-        app:hintTextColor="@color/japan"
-        app:hintTextAppearance="@style/TextAppearance.Material3.BodyMedium">
-
-        <com.google.android.material.textfield.TextInputEditText
+        <RelativeLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textField"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/ic_magnifying_glass_solid"
+                app:endIconContentDescription="@string/search"
+
+                app:boxBackgroundColor="@color/green80"
+                app:boxStrokeColor="@color/japan"
+
+                android:hint="@string/search"
+                android:textColorHint="@color/japan"
+                app:hintTextColor="@color/japan"
+                app:hintTextAppearance="@style/TextAppearance.Material3.BodyMedium">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:maxLines="1"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </RelativeLayout>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:contentDescription="@string/new_note"
+            android:layout_marginBottom="20dp"
+            app:srcCompat="@drawable/ic_plus_solid"
 
-            android:maxLines="1"
-            android:inputType="text"/>
+            app:backgroundTint="@color/japan"
+            app:tint="@color/white"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </FrameLayout>

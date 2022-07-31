@@ -5,4 +5,5 @@
     <string name="manager">URL Manager</string>
     <string name="profile">Profile</string>
     <string name="search">Search Title or URL</string>
+    <string name="new_note">Create New Note</string>
 </resources>
