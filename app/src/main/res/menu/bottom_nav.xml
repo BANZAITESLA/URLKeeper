@@ -5,16 +5,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_tag"
+        android:enabled="true"
         android:icon="@drawable/ic_tags_solid"
         android:title="@string/categories" />
 
     <item
         android:id="@+id/menu_home"
+        android:enabled="true"
         android:icon="@drawable/ic_house_solid"
         android:title="@string/home" />
 
     <item
         android:id="@+id/menu_url"
+        android:enabled="true"
         android:icon="@drawable/ic_link_solid"
         android:title="@string/manager" />
 </menu>
