@@ -13,11 +13,15 @@
 
     <color name="base">#FFFCF3</color>
     <color name="coral">#CF6247</color>
+    <color name="coral90">#E6CF6247</color>
     <color name="brown">#E2B848</color>
+    <color name="brown90">#E6E2B848</color>
+    <color name="brown80">#CCE2B848</color>
     <color name="cc">#DCDAB5</color>
     <color name="green">#74AD8F</color>
     <color name="green90">#E674AD8F</color>
     <color name="green80">#CC74AD8F</color>
     <color name="japan">#1E3848</color>
     <color name="japan90">#E61E3848</color>
+    <color name="japan80">#CC1E3848</color>
 </resources>

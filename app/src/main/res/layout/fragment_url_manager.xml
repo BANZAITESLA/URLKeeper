@@ -13,13 +13,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/textField"
+                android:id="@+id/search_textField"
 
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,6 +44,113 @@
                     android:inputType="text"/>
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/url_cardView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/search_textField"
+                android:layout_marginTop="20dp"
+
+                app:cardBackgroundColor="@color/brown90"
+                app:strokeColor="@color/japan">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp">
+
+                    <RelativeLayout
+                        android:id="@+id/title_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/title_note"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/title"
+                            android:layout_alignParentStart="true"
+                            android:layout_toStartOf="@id/star_check"
+                            android:textAppearance="?attr/textAppearanceTitleMedium"
+                            android:textStyle="bold"
+                            android:textColor="@color/japan"/>
+
+                        <CheckBox
+                            android:id="@+id/star_check"
+                            android:layout_width="20dp"
+                            android:layout_height="18dp"
+                            android:layout_alignParentEnd="true"
+                            android:button="@drawable/star_state"
+                            app:buttonTint="@color/coral" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/title_divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_below="@id/title_layout"
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="3dp"
+                        android:background="@color/japan80" />
+
+                    <RelativeLayout
+                        android:id="@+id/link_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/title_divider"
+
+                        >
+
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/link_textField"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
+                            app:endIconMode="custom"
+                            app:endIconDrawable="@drawable/ic_clone_solid"
+                            app:endIconTint="@color/coral90"
+
+                            app:boxBackgroundColor="@color/cc"
+                            app:boxStrokeColor="@color/japan"
+
+                            android:hint="@string/link"
+                            android:textColorHint="@color/japan80"
+                            app:hintTextColor="@color/japan80"
+                            app:hintTextAppearance="@style/TextAppearance.Material3.BodyMedium"
+
+                            android:enabled="false" >
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/link_textInput"
+                                android:layout_width="match_parent"
+                                android:layout_height="40dp"
+
+                                android:maxLines="1"
+                                android:inputType="text" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+
+                    </RelativeLayout>
+
+
+
+                    <TextView
+                        android:id="@+id/lastEdited_note"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@id/link_layout"
+
+                        android:text="@string/last_edited"
+                        android:textAppearance="?attr/textAppearanceBodyMedium"
+                        android:textColor="@color/japan80" />
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
         </RelativeLayout>
 
