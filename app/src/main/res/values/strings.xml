@@ -6,4 +6,7 @@
     <string name="profile">Profile</string>
     <string name="search">Search Title or URL</string>
     <string name="new_note">Create New Note</string>
+    <string name="title">Title</string>
+    <string name="link">Link</string>
+    <string name="last_edited">Last Edited</string>
 </resources>
