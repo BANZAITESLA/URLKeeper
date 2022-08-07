@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 06/08/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6 -->
+
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/url_cardView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+
+    app:cardBackgroundColor="@color/brown90"
+    app:strokeColor="@color/japan" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:id="@+id/title_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center">
+
+            <TextView
+                android:id="@+id/title_note"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/star_check"
+                android:text="@string/title"
+                android:textAppearance="?attr/textAppearanceTitleMedium"
+                android:textColor="@color/japan"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/star_check"
+                android:layout_width="21dp"
+                android:layout_height="18dp"
+                android:layout_alignParentEnd="true"
+                android:button="@drawable/star_state"
+                app:buttonTint="@color/coral" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/title_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/title_layout"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
+            android:background="@color/japan80" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/link_textField"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_divider"
+
+            android:paddingBottom="10dp"
+
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
+            app:endIconMode="custom"
+            app:endIconDrawable="@drawable/ic_clone_solid"
+            app:endIconTint="@color/coral80"
+
+            app:boxBackgroundColor="@color/cc"
+            app:boxStrokeColor="@color/japan"
+
+            android:hint="@string/link"
+            android:textColorHint="@color/japan90"
+            app:hintTextColor="@color/japan90"
+            app:hintTextAppearance="@style/TextAppearance.Material3.BodyMedium"
+
+            android:enabled="false" >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+
+                android:maxLines="1"
+                android:inputType="text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:id="@+id/lastEdited_note"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/link_textField"
+            android:layout_alignParentStart="true"
+            android:drawablePadding="5dp"
+
+            android:gravity="center"
+            android:text="@string/last_edited"
+            android:textAppearance="?attr/textAppearanceBodySmall"
+
+            android:textColor="@color/japan80"
+            app:drawableStartCompat="@drawable/ic_clock_rotate_left_solid"
+            app:drawableTint="@color/japan90" />
+
+    </RelativeLayout>
+
+</com.google.android.material.card.MaterialCardView>
