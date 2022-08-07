@@ -1,4 +1,4 @@
-package com.disu.urlkeeper;
+package com.disu.urlkeeper.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
+import com.disu.urlkeeper.R;
 import com.disu.urlkeeper.fragment.UrlManagerFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -61,8 +62,6 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
         }
         return loadFragment(fragment);
     }
-
-
 
     @Override
     public void onBackPressed() {

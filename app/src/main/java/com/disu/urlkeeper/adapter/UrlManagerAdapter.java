@@ -1,6 +1,7 @@
 package com.disu.urlkeeper.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.disu.urlkeeper.R;
+import com.disu.urlkeeper.activity.NewNoteActivity;
 import com.disu.urlkeeper.data.UrlNoteData;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
@@ -54,6 +56,8 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
             title = itemView.findViewById(R.id.title_note);
             link = itemView.findViewById(R.id.link_textField);
             last = itemView.findViewById(R.id.lastEdited_note);
+
+            itemView.setOnClickListener(view -> itemView.getContext().startActivity(new Intent(itemView.getContext(), NewNoteActivity.class)));
         }
     }
 }
