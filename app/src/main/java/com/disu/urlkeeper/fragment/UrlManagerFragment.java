@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.disu.urlkeeper.CustomLinearLayoutManager;
 import com.disu.urlkeeper.R;
 import com.disu.urlkeeper.adapter.UrlManagerAdapter;
 import com.disu.urlkeeper.dao.UrlNoteDao;
@@ -37,7 +38,7 @@ public class UrlManagerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_url_manager, container, false);
 
         recyclerViewNoteList = (RecyclerView) view.findViewById(R.id.urlNote_recylerView);
-        recyclerViewNoteList.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewNoteList.setLayoutManager(new CustomLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         FirebaseRecyclerOptions<UrlNoteData> options = new FirebaseRecyclerOptions.Builder<UrlNoteData>()
                 .setQuery(FirebaseDatabase.getInstance().getReference().child("note"), UrlNoteData.class)
