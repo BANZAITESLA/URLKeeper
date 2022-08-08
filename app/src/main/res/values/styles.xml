@@ -6,7 +6,6 @@
     <style name="AppTheme" parent="Theme.Material3.DayNight">
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:splitMotionEvents">false</item>
-
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -24,6 +23,18 @@
 
         <item name="colorSecondaryContainer">@color/japan90</item>
         <item name="colorOnSecondaryContainer">@color/white</item>
+
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
+    </style>
+
+    <style name="Widget.App.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
+    </style>
+
+    <style name="ThemeOverlay.App.Toolbar" parent="">
+        <item name="navigationIconTint">@color/japan90</item>
+        <item name="android:background">@color/cc</item>
+        <item name="android:tint">@color/japan90</item>
     </style>
 
     <style name="Widget.App.Button.OutlinedButton.IconOnly" parent="Widget.Material3.Button.OutlinedButton">

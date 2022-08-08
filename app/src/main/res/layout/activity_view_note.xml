@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/base"
+    tools:context=".activity.ViewNoteActivity">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true">
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                style="?attr/collapsingToolbarLayoutMediumStyle"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/collapsingToolbarLayoutMediumSize">
+
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:elevation="0dp"
+
+                    app:menu="@menu/view_note"
+                    app:navigationIcon="@drawable/ic_angle_left_solid"
+                    app:title="@string/app_name"
+                    style="@style/Widget.App.Toolbar"/>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/link_inputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/copyLink_button"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="5dp"
+
+                        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+
+                        app:boxBackgroundColor="@color/brown90"
+                        app:boxStrokeColor="@color/japan"
+
+                        android:hint="@string/link"
+                        android:textColorHint="@color/japan"
+                        app:hintTextColor="@color/japan"
+                        app:hintTextAppearance="@style/TextAppearance.Material3.BodyLarge">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/link_inputEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:inputType="text"
+                            android:textCursorDrawable="@drawable/cursor"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/copyLink_button"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:backgroundTint="@color/japan80"
+
+                        android:layout_marginTop="6dp"
+                        android:paddingTop="19dp"
+                        android:paddingBottom="19dp"
+
+                        app:icon="@drawable/ic_clone_solid"
+                        app:iconTint="@color/white"
+                        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                        style="@style/Widget.Material3.Button.ElevatedButton.Icon"/>
+
+                </RelativeLayout>
+
+
+                <Button
+                    android:id="@+id/generate_shortlink"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginTop="20dp"
+                    android:paddingTop="17dp"
+                    android:paddingBottom="17dp"
+
+                    android:backgroundTint="@color/japan80"
+
+                    android:text="@string/generate_sl"
+                    android:textColor="@color/white"
+                    android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+
+                    style="@style/Widget.Material3.Button.ElevatedButton"
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp" >
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/shortLink_inputLayout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toStartOf="@+id/copyShortLink_button"
+                        android:layout_centerInParent="true"
+                        android:layout_marginEnd="5dp"
+
+                        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+
+                        app:boxBackgroundColor="@color/brown90"
+                        app:boxStrokeColor="@color/japan"
+
+                        android:hint="@string/short_link"
+                        android:textColorHint="@color/japan"
+                        app:hintTextColor="@color/japan"
+                        app:hintTextAppearance="@style/TextAppearance.Material3.BodyLarge">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/shortLink_inputEdit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+
+                            android:inputType="text"
+                            android:textCursorDrawable="@drawable/cursor"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/copyShortLink_button"
+                        android:layout_width="50dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:backgroundTint="@color/japan80"
+
+                        android:layout_marginTop="6dp"
+                        android:paddingTop="19dp"
+                        android:paddingBottom="19dp"
+
+                        app:icon="@drawable/ic_clone_solid"
+                        app:iconTint="@color/white"
+                        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+                        style="@style/Widget.Material3.Button.ElevatedButton.Icon"/>
+
+                </RelativeLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/secretNote_inputLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    app:endIconMode="password_toggle"
+
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+
+                    app:boxBackgroundColor="@color/brown90"
+                    app:boxStrokeColor="@color/japan"
+
+                    android:hint="@string/secret_note"
+                    android:textColorHint="@color/japan"
+                    app:hintTextColor="@color/japan"
+                    app:hintTextAppearance="@style/TextAppearance.Material3.BodyLarge">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/secretNote_inputEdit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:inputType="textPassword|textMultiLine"
+                        android:textCursorDrawable="@drawable/cursor"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+
+                    app:boxBackgroundColor="@color/brown90"
+                    app:boxStrokeColor="@color/japan"
+
+                    android:hint="@string/visible_note"
+                    android:textColorHint="@color/japan"
+                    app:hintTextColor="@color/japan"
+                    app:hintTextAppearance="@style/TextAppearance.Material3.BodyLarge">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:inputType="textMultiLine"
+                        android:textCursorDrawable="@drawable/cursor"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+</RelativeLayout>

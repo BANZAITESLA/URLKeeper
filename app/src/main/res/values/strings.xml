@@ -8,5 +8,12 @@
     <string name="new_note">Create New Note</string>
     <string name="title">Title</string>
     <string name="link">Link</string>
+    <string name="short_link">Shorten Link</string>
+    <string name="generate_sl">Generate Short Link</string>
     <string name="last_edited">Last edited : %1$s</string>
+    <string name="favorite">Favorite</string>
+    <string name="delete">Delete</string>
+    <string name="share">Share</string>
+    <string name="secret_note">Secret Note</string>
+    <string name="visible_note">Note</string>
 </resources>

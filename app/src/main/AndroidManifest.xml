@@ -16,10 +16,13 @@
         android:theme="@style/Theme.URLKeeper"
         tools:targetApi="31" >
         <activity
-            android:name=".activity.NewNoteActivity"
-            android:exported="false" />
+            android:name=".activity.ViewNoteActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".activity.MainActivity"
+            android:windowSoftInputMode="adjustPan"
             android:exported="true"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>

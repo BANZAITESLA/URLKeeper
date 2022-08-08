@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 07/08/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6 -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android" >
+    <size android:width="2dp" />
+    <solid android:color="@color/japan"  />
+</shape>

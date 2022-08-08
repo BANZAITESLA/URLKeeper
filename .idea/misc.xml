@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_angle_left_solid.xml" value="0.1" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.128" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_clock_rotate_left_solid.xml" value="0.103" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_clone_solid.xml" value="0.106" />
@@ -11,17 +12,21 @@
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_link_solid.xml" value="0.1" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_magnifying_glass_solid.xml" value="0.128" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_plus_solid.xml" value="0.103" />
+        <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_share_nodes_solid.xml" value="0.1" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_star_regular.xml" value="0.1" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_star_solid.xml" value="0.1" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_tags_solid.xml" value="0.1" />
+        <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/ic_trash_solid.xml" value="0.1" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/star_state.xml" value="0.1" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/drawable/state.xml" value="0.128" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/layout/activity_main.xml" value="0.17552083333333332" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/layout/activity_new_note.xml" value="0.17552083333333332" />
+        <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/layout/activity_view_note.xml" value="0.16666666666666666" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/layout/fragment_url_manager.xml" value="0.25" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/layout/row_url_manager.xml" value="0.17552083333333332" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/menu/bottom_nav.xml" value="0.17447916666666666" />
         <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/menu/top_bar.xml" value="0.17552083333333332" />
+        <entry key="..\:/GoogleDrive/Document/SMT6/Aplikasi Komputasi Bergerak/Github/URLKeeper/app/src/main/res/menu/view_note.xml" value="0.17552083333333332" />
       </map>
     </option>
   </component>

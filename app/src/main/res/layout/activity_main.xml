@@ -27,11 +27,10 @@
 
                 app:menu="@menu/top_bar"
                 app:navigationIcon="@drawable/ic_gear_solid"
-                app:navigationIconTint="@color/japan90"
-
                 app:title="@string/app_name"
+                app:titleCentered="true"
                 app:titleTextColor="@color/japan"
-                app:titleCentered="true" />
+                style="@style/Widget.App.Toolbar" />
 
         </com.google.android.material.appbar.AppBarLayout>
 
