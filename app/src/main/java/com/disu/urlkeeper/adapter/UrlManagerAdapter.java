@@ -1,5 +1,6 @@
 package com.disu.urlkeeper.adapter;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,6 +23,8 @@ import com.google.android.material.textfield.TextInputLayout;
 
 public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlManagerAdapter.ViewHolder> {
 
+    private Context context;
+
     public UrlManagerAdapter(@NonNull FirebaseRecyclerOptions<UrlNoteData> options) {
         super(options);
     }
@@ -31,6 +34,11 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
         holder.title.setText(model.getTitle());
         holder.link.setHint(model.getUrl());
         holder.last.setText(String.format("Last edited : %s", model.getLast_edited()));
+
+        holder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(holder.itemView.getContext(), ViewNoteActivity.class);
+            holder.itemView.getContext().startActivity(intent);
+        });
     }
 
     @NonNull
@@ -51,8 +59,7 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
             title = itemView.findViewById(R.id.title_note);
             link = itemView.findViewById(R.id.link_textField);
             last = itemView.findViewById(R.id.lastEdited_note);
-
-            itemView.setOnClickListener(view -> itemView.getContext().startActivity(new Intent(itemView.getContext(), ViewNoteActivity.class)));
+//                    view -> itemView.getContext().startActivity(new Intent(itemView.getContext(), ViewNoteActivity.class)));
         }
     }
 }

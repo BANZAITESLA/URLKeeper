@@ -119,6 +119,7 @@
                     app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"/>
 
                 <RelativeLayout
+                    android:id="@+id/shortLink_layout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp" >
@@ -145,6 +146,7 @@
                             android:id="@+id/shortLink_inputEdit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="false"
 
                             android:inputType="text"
                             android:textCursorDrawable="@drawable/cursor"/>
@@ -197,6 +199,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/visibleNote_inputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
@@ -213,6 +216,7 @@
                     app:hintTextAppearance="@style/TextAppearance.Material3.BodyLarge">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/visibleNote_InputEdit"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 

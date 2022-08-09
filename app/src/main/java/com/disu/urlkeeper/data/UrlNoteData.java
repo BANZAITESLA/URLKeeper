@@ -5,9 +5,10 @@ package com.disu.urlkeeper.data;
  */
 
 public class UrlNoteData {
+    private String id; // required|auto
     private String title; // required
     private String url; // required
-    private String shorten_url;
+    private String short_url;
     private String secret_note;
     private String visible_note;
     private String last_edited;
@@ -16,14 +17,23 @@ public class UrlNoteData {
 
     public UrlNoteData(){} // for firebase
 
-    public UrlNoteData(String title, String url, String shorten_url, String secret_note, String visible_note, String last_edited, String categories) {
+    public UrlNoteData(String title, String url, String short_url, String secret_note, String visible_note, String last_edited, String categories) {
+        this.id = id;
         this.title = title;
         this.url = url;
-        this.shorten_url = shorten_url;
+        this.short_url = short_url;
         this.secret_note = secret_note;
         this.visible_note = visible_note;
         this.last_edited = last_edited;
         this.categories = categories;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {
@@ -42,12 +52,12 @@ public class UrlNoteData {
         this.url = url;
     }
 
-    public String getShorten_url() {
-        return shorten_url;
+    public String getShort_url() {
+        return short_url;
     }
 
-    public void setShorten_url(String shorten_url) {
-        this.shorten_url = shorten_url;
+    public void setShort_url(String short_url) {
+        this.short_url = short_url;
     }
 
     public String getSecret_note() {

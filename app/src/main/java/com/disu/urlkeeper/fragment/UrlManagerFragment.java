@@ -37,11 +37,11 @@ public class UrlManagerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_url_manager, container, false);
 
-        recyclerViewNoteList = (RecyclerView) view.findViewById(R.id.urlNote_recylerView);
+        recyclerViewNoteList = view.findViewById(R.id.urlNote_recylerView);
         recyclerViewNoteList.setLayoutManager(new CustomLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
         FirebaseRecyclerOptions<UrlNoteData> options = new FirebaseRecyclerOptions.Builder<UrlNoteData>()
-                .setQuery(FirebaseDatabase.getInstance().getReference().child("note"), UrlNoteData.class)
+                .setQuery(FirebaseDatabase.getInstance().getReference().child("note").child("user1"), UrlNoteData.class)
                 .build();
 
         adapter = new UrlManagerAdapter(options);
