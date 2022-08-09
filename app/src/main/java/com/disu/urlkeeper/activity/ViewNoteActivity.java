@@ -2,8 +2,12 @@ package com.disu.urlkeeper.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import android.view.MenuItem;
 import com.disu.urlkeeper.R;
 import com.disu.urlkeeper.data.UrlNoteData;
+import com.disu.urlkeeper.fragment.UrlManagerFragment;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
@@ -14,6 +18,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import android.app.Activity;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Rect;
@@ -24,15 +30,16 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 public class ViewNoteActivity extends AppCompatActivity {
 
     Query databaseReference;
     private TextInputEditText title, link, shortLink, secretNote, visibleNote;
-    private Button shortLink_button;
+    private Button shortLink_button, copyLink_button, copyShortLink_button;
     private RelativeLayout shortLink_layout;
+    private MaterialToolbar toolbar;
     UrlNoteData url;
-
     String id;
 
     @Override
@@ -47,10 +54,15 @@ public class ViewNoteActivity extends AppCompatActivity {
         visibleNote = findViewById(R.id.visibleNote_InputEdit);
         shortLink_button = findViewById(R.id.generate_shortlink);
         shortLink_layout = findViewById(R.id.shortLink_layout);
+        copyLink_button = findViewById(R.id.copyLink_button);
+        copyShortLink_button = findViewById(R.id.copyShortLink_button);
+        toolbar = findViewById(R.id.materialToolbar);
 
         id = getIntent().getStringExtra("id");
 
         getData();
+        copyLink();
+        toolbarClicked();
     }
 
     private void getData() { // get data by id
@@ -82,6 +94,42 @@ public class ViewNoteActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void copyLink() {
+        copyLink_button.setOnClickListener(view -> {
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("link", link.getText());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getApplicationContext(), "Link copied", Toast.LENGTH_LONG).show();
+        });
+
+        copyShortLink_button.setOnClickListener(view -> {
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("short_link", shortLink.getText());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(getApplicationContext(), "Short link copied", Toast.LENGTH_LONG).show();
+        });
+    }
+
+    private void toolbarClicked() {
+        toolbar.setNavigationOnClickListener(view -> finish());
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.star_view:
+//                fragment = new UrlManagerFragment();
+                break;
+//            case R.id.menu_tag:
+////                fragment = new UrlManagerFragment();
+//                break;
+            case R.id.menu_url:
+//                fragment = new UrlManagerFragment();
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

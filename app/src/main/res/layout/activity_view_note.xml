@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/viewNote_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -18,7 +17,7 @@
             android:fitsSystemWindows="true">
 
                 <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/title_materialToolbar"
+                    android:id="@+id/materialToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
@@ -94,6 +93,7 @@
                             android:id="@+id/link_inputEdit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:enabled="false"
 
                             android:inputType="text"
                             android:textCursorDrawable="@drawable/cursor"/>
@@ -102,19 +102,19 @@
 
                     <Button
                         android:id="@+id/copyLink_button"
+                        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:backgroundTint="@color/japan80"
 
                         android:layout_marginTop="6dp"
+                        android:backgroundTint="@color/japan80"
                         android:paddingTop="19dp"
-                        android:paddingBottom="19dp"
 
+                        android:paddingBottom="19dp"
                         app:icon="@drawable/ic_clone_solid"
                         app:iconTint="@color/white"
-                        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
-                        style="@style/Widget.Material3.Button.ElevatedButton.Icon"/>
+                        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium" />
 
                 </RelativeLayout>
 
@@ -165,7 +165,7 @@
                             android:id="@+id/shortLink_inputEdit"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:enabled="false"
+
 
                             android:inputType="text"
                             android:textCursorDrawable="@drawable/cursor"/>
@@ -174,19 +174,19 @@
 
                     <Button
                         android:id="@+id/copyShortLink_button"
+                        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:backgroundTint="@color/japan80"
 
                         android:layout_marginTop="6dp"
+                        android:backgroundTint="@color/japan80"
                         android:paddingTop="19dp"
-                        android:paddingBottom="19dp"
 
+                        android:paddingBottom="19dp"
                         app:icon="@drawable/ic_clone_solid"
                         app:iconTint="@color/white"
-                        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
-                        style="@style/Widget.Material3.Button.ElevatedButton.Icon"/>
+                        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium" />
 
                 </RelativeLayout>
 

@@ -4,28 +4,19 @@
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-<!--    <group android:checkableBehavior="single">-->
-        <item
-            android:id="@+id/star_view1"
-            android:icon="@drawable/star_state"
-            android:title="@string/favorite"
-            android:contentDescription="@string/favorite"
-            app:showAsAction="ifRoom"
-            android:checkable="true"/>
-<!--    </group>-->
+    <item
+        android:id="@+id/star_view"
+        android:icon="@drawable/star_state"
+        android:title="@string/favorite"
+        android:contentDescription="@string/favorite"
+        app:showAsAction="ifRoom"
+        android:checkable="true"/>
 
     <item
         android:id="@+id/delete_view"
         android:icon="@drawable/ic_trash_solid"
         android:title="@string/delete"
         android:contentDescription="@string/delete"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/share_view"
-        android:icon="@drawable/ic_share_nodes_solid"
-        android:title="@string/share"
-        android:contentDescription="@string/share"
         app:showAsAction="ifRoom" />
 
 </menu>
