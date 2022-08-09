@@ -17,15 +17,13 @@ public class UrlNoteData {
 
     public UrlNoteData(){} // for firebase
 
-    public UrlNoteData(String title, String url, String short_url, String secret_note, String visible_note, String last_edited, String categories) {
+    public UrlNoteData(String id, String title, String url, String short_url, String secret_note, String visible_note) {
         this.id = id;
         this.title = title;
         this.url = url;
         this.short_url = short_url;
         this.secret_note = secret_note;
         this.visible_note = visible_note;
-        this.last_edited = last_edited;
-        this.categories = categories;
     }
 
     public String getId() {

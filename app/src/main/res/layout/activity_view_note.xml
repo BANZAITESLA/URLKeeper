@@ -247,6 +247,23 @@
 
         </androidx.core.widget.NestedScrollView>
 
+        <Button
+            android:id="@+id/addSave_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@color/coral"
+
+            android:layout_marginTop="20dp"
+            android:paddingTop="17dp"
+            android:paddingBottom="17dp"
+
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:textAppearance="@style/TextAppearance.Material3.BodyLarge"
+            style="@style/Widget.Material3.Button.ElevatedButton"
+            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.None"/>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </RelativeLayout>

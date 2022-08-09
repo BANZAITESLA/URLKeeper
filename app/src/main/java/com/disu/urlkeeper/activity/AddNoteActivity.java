@@ -2,6 +2,8 @@ package com.disu.urlkeeper.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.disu.urlkeeper.R;
+import com.disu.urlkeeper.dao.NoteDao;
+import com.disu.urlkeeper.data.UrlNoteData;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -20,7 +22,7 @@ import android.widget.Toast;
 public class AddNoteActivity extends AppCompatActivity {
 
     private TextInputEditText title, link, shortLink, secretNote, visibleNote;
-    private Button shortLink_button, copyLink_button, copyShortLink_button;
+    private Button shortLink_button, copyLink_button, copyShortLink_button, saveButton;
     private RelativeLayout shortLink_layout;
     private MaterialToolbar toolbar;
 
@@ -39,6 +41,21 @@ public class AddNoteActivity extends AppCompatActivity {
         copyLink_button = findViewById(R.id.addCopyLink_button);
         copyShortLink_button = findViewById(R.id.addCopyShortLink_button);
         toolbar = findViewById(R.id.materialToolbar_add);
+        saveButton = findViewById(R.id.addSave_button);
+
+        NoteDao dao = new NoteDao();
+        saveButton.setOnClickListener(view -> {
+            if (!title.getText().toString().equals("") || !link.getText().toString().equals("")) {
+                UrlNoteData urlNoteData = new UrlNoteData(dao.readId(), title.getText().toString(), link.getText().toString(), shortLink.getText().toString(), secretNote.getText().toString(), visibleNote.getText().toString());
+                dao.addNote(urlNoteData).addOnSuccessListener(success -> {
+                    Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show();
+                }).addOnFailureListener(error -> {
+                    Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show();
+                });
+            } else {
+                Toast.makeText(getApplicationContext(), "Title and Link could not empty", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         toolbarClicked();
         copyLink();

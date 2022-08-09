@@ -18,13 +18,13 @@
         <activity
             android:name=".activity.AddNoteActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize"/>
+            android:theme="@style/AppTheme2"
+            android:windowSoftInputMode="adjustResize|adjustPan"/>
         <activity
             android:name=".activity.ViewNoteActivity"
             android:exported="false"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize" />
+            android:theme="@style/AppTheme2"
+            android:windowSoftInputMode="adjustResize|adjustPan" />
         <activity
             android:name=".activity.MainActivity"
             android:exported="true"

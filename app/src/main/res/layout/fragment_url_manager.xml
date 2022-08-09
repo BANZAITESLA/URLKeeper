@@ -2,73 +2,83 @@
 
 <!-- 31/07/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6 -->
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragment.UrlManagerFragment">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/addNote_FAB"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end|bottom"
+        android:contentDescription="@string/new_note"
+        android:layout_marginBottom="20dp"
+        app:srcCompat="@drawable/ic_plus_solid"
 
-        <RelativeLayout
+        app:backgroundTint="@color/japan"
+        app:tint="@color/white"/>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true">
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/search_textField"
-
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent">
 
-                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
-                app:endIconMode="custom"
-                app:endIconDrawable="@drawable/ic_magnifying_glass_solid"
-                app:endIconContentDescription="@string/search"
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/search_textField"
 
-                app:boxBackgroundColor="@color/green80"
-                app:boxStrokeColor="@color/japan"
-
-                android:hint="@string/search"
-                android:textColorHint="@color/japan"
-                app:hintTextColor="@color/japan"
-                app:hintTextAppearance="@style/TextAppearance.Material3.BodyMedium">
-
-                <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
-                    android:maxLines="1"
-                    android:inputType="text"
-                    android:textCursorDrawable="@drawable/cursor"/>
+                    app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Full"
+                    app:endIconMode="custom"
+                    app:endIconDrawable="@drawable/ic_magnifying_glass_solid"
+                    app:endIconContentDescription="@string/search"
 
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:boxBackgroundColor="@color/green80"
+                    app:boxStrokeColor="@color/japan"
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/urlNote_recylerView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/search_textField"
+                    android:hint="@string/search"
+                    android:textColorHint="@color/japan"
+                    app:hintTextColor="@color/japan"
+                    app:hintTextAppearance="@style/TextAppearance.Material3.BodyMedium">
 
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal" />
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
 
-        </RelativeLayout>
+                        android:maxLines="1"
+                        android:inputType="text"
+                        android:textCursorDrawable="@drawable/cursor"/>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/addNote_FAB"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
-            android:contentDescription="@string/new_note"
-            android:layout_marginBottom="20dp"
-            app:srcCompat="@drawable/ic_plus_solid"
+                </com.google.android.material.textfield.TextInputLayout>
 
-            app:backgroundTint="@color/japan"
-            app:tint="@color/white"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/urlNote_recylerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/search_textField"
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+                    android:layout_marginTop="20dp"
+                    android:orientation="horizontal" />
+
+            </RelativeLayout>
+
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
 </FrameLayout>
+

@@ -27,6 +27,28 @@
         <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
     </style>
 
+    <style name="AppTheme2" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="android:windowEnableSplitTouch">false</item>
+        <item name="android:splitMotionEvents">false</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+
+        <item name="colorPrimary">@color/cc</item>
+        <item name="colorOnPrimary">@color/japan</item>
+        <item name="colorSecondary">@color/japan</item>
+        <item name="colorOnSecondary">@color/white</item>
+
+        <item name="colorSurface">@color/coral</item>
+        <item name="colorOnSurface">@color/japan90</item>
+        <item name="colorOnSurfaceVariant">@color/japan90</item>
+
+        <item name="colorSecondaryContainer">@color/japan90</item>
+        <item name="colorOnSecondaryContainer">@color/white</item>
+
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
+    </style>
+
     <style name="Widget.App.Toolbar" parent="Widget.Material3.Toolbar">
         <item name="materialThemeOverlay">@style/ThemeOverlay.App.Toolbar</item>
     </style>

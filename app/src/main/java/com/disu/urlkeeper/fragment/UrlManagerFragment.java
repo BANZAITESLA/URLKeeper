@@ -12,18 +12,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import com.disu.urlkeeper.CustomLinearLayoutManager;
+import com.disu.urlkeeper.customization.CustomLinearLayoutManager;
 import com.disu.urlkeeper.R;
 import com.disu.urlkeeper.activity.AddNoteActivity;
 import com.disu.urlkeeper.adapter.UrlManagerAdapter;
-import com.disu.urlkeeper.dao.UrlNoteDao;
 import com.disu.urlkeeper.data.UrlNoteData;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.FirebaseOptions;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class UrlManagerFragment extends Fragment {
@@ -50,8 +46,6 @@ public class UrlManagerFragment extends Fragment {
 
         adapter = new UrlManagerAdapter(options);
         recyclerViewNoteList.setAdapter(adapter);
-
-//        addClicked();
         return view;
     }
 
@@ -65,16 +59,6 @@ public class UrlManagerFragment extends Fragment {
             startActivity(intent);
         });
     }
-
-//    private void addClicked() {
-//        add = view.findViewById(R.id.addNote_FAB);
-////        add.setOnClickListener(new View.OnClickListener() {
-////            @Override
-////            public void onClick(View view) {
-////                Toast.makeText(getContext(), "Link copied", Toast.LENGTH_LONG).show();
-////            }
-////        });
-//    }
 
     @Override
     public void onStart() {

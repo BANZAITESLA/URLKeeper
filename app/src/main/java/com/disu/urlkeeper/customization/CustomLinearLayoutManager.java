@@ -1,4 +1,4 @@
-package com.disu.urlkeeper;
+package com.disu.urlkeeper.customization;
 
 import android.content.Context;
 import android.util.AttributeSet;
