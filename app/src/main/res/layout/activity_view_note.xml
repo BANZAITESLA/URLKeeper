@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/viewNote_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -16,22 +17,14 @@
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                style="?attr/collapsingToolbarLayoutMediumStyle"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/collapsingToolbarLayoutMediumSize">
-
                 <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/title_materialToolbar"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:elevation="0dp"
 
                     app:menu="@menu/view_note"
                     app:navigationIcon="@drawable/ic_angle_left_solid"
-                    app:title="@string/app_name"
                     style="@style/Widget.App.Toolbar"/>
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -47,6 +40,32 @@
                 android:orientation="vertical"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/title_inputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
+
+                app:boxBackgroundColor="@color/brown90"
+                app:boxStrokeColor="@color/japan"
+
+                android:hint="@string/title"
+                android:textColorHint="@color/japan"
+                app:hintTextColor="@color/japan"
+                app:hintTextAppearance="@style/TextAppearance.Material3.BodyLarge">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/title_InputEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:inputType="textMultiLine"
+                    android:textCursorDrawable="@drawable/cursor"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
 
                 <RelativeLayout
                     android:layout_width="match_parent"
