@@ -6,16 +6,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.disu.urlkeeper.R;
+import com.disu.urlkeeper.activity.AddNoteActivity;
 import com.disu.urlkeeper.activity.ViewNoteActivity;
 import com.disu.urlkeeper.data.UrlNoteData;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,29 +44,7 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
 
         holder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(holder.itemView.getContext(), ViewNoteActivity.class);
-//            intent.putExtra("child", )
             intent.putExtra("id", model.getId());
-//            intent.putExtra("url", model.getUrl());
-//            intent.putExtra("short_url", model.getShort_url());
-//            intent.putExtra("secret_note", model.getSecret_note());
-//            intent.putExtra("visible_note", model.getVisible_note());
-//            intent.putExtra("last_edited", model.getLast_edited());
-
-//            ValueEventListener postListener = new ValueEventListener() {
-//                @Override
-//                public void onDataChange(@NonNull DataSnapshot snapshot) {
-//                    for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-//                        String key = dataSnapshot.getRef().getParent().getKey();
-//                        intent.putExtra("key", key);
-//                    }
-//                }
-//
-//                @Override
-//                public void onCancelled(@NonNull DatabaseError error) {
-//
-//                }
-//            };
-
             holder.itemView.getContext().startActivity(intent);
         });
     }
@@ -86,7 +67,6 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
             title = itemView.findViewById(R.id.title_note);
             link = itemView.findViewById(R.id.link_textField);
             last = itemView.findViewById(R.id.lastEdited_note);
-//                    view -> itemView.getContext().startActivity(new Intent(itemView.getContext(), ViewNoteActivity.class)));
         }
     }
 }
