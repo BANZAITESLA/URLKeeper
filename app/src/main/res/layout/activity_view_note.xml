@@ -107,6 +107,7 @@
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
+                        android:visibility="visible"
 
                         android:layout_marginTop="6dp"
                         android:backgroundTint="@color/japan80"
@@ -251,7 +252,7 @@
         </androidx.core.widget.NestedScrollView>
 
         <Button
-            android:id="@+id/addSave_button"
+            android:id="@+id/save_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

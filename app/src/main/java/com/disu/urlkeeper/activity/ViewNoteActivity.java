@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment;
 
 import android.view.MenuItem;
 import com.disu.urlkeeper.R;
+import com.disu.urlkeeper.dao.NoteDao;
 import com.disu.urlkeeper.data.UrlNoteData;
 import com.disu.urlkeeper.fragment.UrlManagerFragment;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -32,11 +34,14 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import java.util.HashMap;
+
 public class ViewNoteActivity extends AppCompatActivity {
 
     Query databaseReference;
+    private TextInputLayout title_layout, link_layout;
     private TextInputEditText title, link, shortLink, secretNote, visibleNote;
-    private Button shortLink_button, copyLink_button, copyShortLink_button;
+    private Button shortLink_button, copyLink_button, copyShortLink_button, save_button;
     private RelativeLayout shortLink_layout;
     private MaterialToolbar toolbar;
     UrlNoteData url;
@@ -48,7 +53,9 @@ public class ViewNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_note);
 
         title = findViewById(R.id.title_InputEdit);
+        title_layout = findViewById(R.id.title_inputLayout);
         link = findViewById(R.id.link_inputEdit);
+        link_layout = findViewById(R.id.link_inputLayout);
         shortLink = findViewById(R.id.shortLink_inputEdit);
         secretNote = findViewById(R.id.secretNote_inputEdit);
         visibleNote = findViewById(R.id.visibleNote_InputEdit);
@@ -57,6 +64,7 @@ public class ViewNoteActivity extends AppCompatActivity {
         copyLink_button = findViewById(R.id.copyLink_button);
         copyShortLink_button = findViewById(R.id.copyShortLink_button);
         toolbar = findViewById(R.id.materialToolbar);
+        save_button = findViewById(R.id.save_button);
 
         id = getIntent().getStringExtra("id");
 
@@ -72,13 +80,14 @@ public class ViewNoteActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     url = dataSnapshot.getValue(UrlNoteData.class);
+                    String key = dataSnapshot.getKey();
 
                     title.setText(url.getTitle());
                     link.setText(url.getUrl());
                     secretNote.setText(url.getSecret_note());
                     visibleNote.setText(url.getVisible_note());
 
-                    if (dataSnapshot.child("short_url").exists() && url.getShort_url().equals("")) {
+                    if (dataSnapshot.child("short_url").exists() && !url.getShort_url().equals("")) {
                         shortLink_button.setVisibility(View.GONE);
                         shortLink_layout.setVisibility(View.VISIBLE);
                         shortLink.setText(url.getShort_url());
@@ -86,6 +95,8 @@ public class ViewNoteActivity extends AppCompatActivity {
                         shortLink_button.setVisibility(View.VISIBLE);
                         shortLink_layout.setVisibility(View.GONE);
                     }
+
+                    updateData(key);
                 }
             }
 
@@ -94,6 +105,48 @@ public class ViewNoteActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void updateData(String key) {
+        NoteDao dao = new NoteDao();
+
+        save_button.setOnClickListener(view -> {
+            if (!title.getText().toString().equals("") && !link.getText().toString().equals("")) {
+                HashMap<String, Object> hashMap = new HashMap<>();
+                hashMap.put("title", title.getText().toString());
+                hashMap.put("url", link.getText().toString());
+                hashMap.put("short_url", link.getText().toString());
+                hashMap.put("secret_note", secretNote.getText().toString());
+                hashMap.put("visible_note", visibleNote.getText().toString());
+                dao.updateNote(key, hashMap).addOnSuccessListener(success -> Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show());
+
+                title_layout.setErrorEnabled(false);
+                link_layout.setErrorEnabled(false);
+                copyLink_button.setVisibility(View.VISIBLE);
+            } else {
+                if (!title.getText().toString().equals("")) {
+                    title_layout.setErrorEnabled(false);
+                }
+
+                if (!link.getText().toString().equals("")) {
+                    link_layout.setErrorEnabled(false);
+                    copyLink_button.setVisibility(View.VISIBLE);
+                }
+
+                if (title.getText().toString().equals("")) {
+                    title_layout.setErrorEnabled(true);
+                    title_layout.setError("Title could not be blank");
+                }
+
+                if (link.getText().toString().equals("")) {
+                    copyLink_button.setVisibility(View.GONE);
+                    link_layout.setErrorEnabled(true);
+                    link_layout.setError("Link could not be blank");
+                }
+            }
+        });
+
     }
 
     private void copyLink() {
