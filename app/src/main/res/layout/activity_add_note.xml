@@ -50,6 +50,7 @@
 
                     app:boxBackgroundColor="@color/brown90"
                     app:boxStrokeColor="@color/japan"
+                    app:endIconMode="clear_text"
 
                     android:hint="@string/title"
                     android:textColorHint="@color/japan"
@@ -67,23 +68,17 @@
 
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp">
-
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/addLink_inputLayout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_toStartOf="@+id/addCopyLink_button"
-                        android:layout_centerInParent="true"
-                        android:layout_marginEnd="5dp"
+                        android:layout_marginTop="20dp"
 
                         app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
 
                         app:boxBackgroundColor="@color/brown90"
                         app:boxStrokeColor="@color/japan"
+                        app:endIconMode="clear_text"
 
                         android:hint="@string/link"
                         android:textColorHint="@color/japan"
@@ -100,24 +95,6 @@
                             android:textCursorDrawable="@drawable/cursor"/>
 
                     </com.google.android.material.textfield.TextInputLayout>
-
-                    <Button
-                        android:id="@+id/addCopyLink_button"
-                        style="@style/Widget.Material3.Button.ElevatedButton.Icon"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentEnd="true"
-
-                        android:layout_marginTop="6dp"
-                        android:backgroundTint="@color/japan80"
-                        android:paddingTop="19dp"
-
-                        android:paddingBottom="19dp"
-                        app:icon="@drawable/ic_clone_solid"
-                        app:iconTint="@color/white"
-                        app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium" />
-
-                </RelativeLayout>
 
 
                 <Button
@@ -168,8 +145,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:enabled="false"
-
-                            android:text="0"
                             android:inputType="text"
                             android:textCursorDrawable="@drawable/cursor"/>
 
@@ -231,6 +206,7 @@
 
                     app:boxBackgroundColor="@color/brown90"
                     app:boxStrokeColor="@color/japan"
+                    app:endIconMode="clear_text"
 
                     android:hint="@string/visible_note"
                     android:textColorHint="@color/japan"

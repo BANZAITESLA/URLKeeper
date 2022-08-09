@@ -24,6 +24,8 @@
         <item name="colorSecondaryContainer">@color/japan90</item>
         <item name="colorOnSecondaryContainer">@color/white</item>
 
+        <item name="colorError">@color/error</item>
+
         <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
     </style>
 
@@ -45,6 +47,8 @@
 
         <item name="colorSecondaryContainer">@color/japan90</item>
         <item name="colorOnSecondaryContainer">@color/white</item>
+
+        <item name="colorError">@color/error</item>
 
         <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
     </style>

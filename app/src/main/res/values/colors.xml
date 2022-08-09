@@ -26,4 +26,5 @@
     <color name="japan">#1E3848</color>
     <color name="japan90">#E61E3848</color>
     <color name="japan80">#CC1E3848</color>
+    <color name="error">#A62B24</color>
 </resources>

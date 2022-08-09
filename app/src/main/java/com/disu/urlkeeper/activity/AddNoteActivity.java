@@ -6,6 +6,7 @@ import com.disu.urlkeeper.dao.NoteDao;
 import com.disu.urlkeeper.data.UrlNoteData;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -21,8 +22,9 @@ import android.widget.Toast;
 
 public class AddNoteActivity extends AppCompatActivity {
 
+    private TextInputLayout title_layout, link_layout;
     private TextInputEditText title, link, shortLink, secretNote, visibleNote;
-    private Button shortLink_button, copyLink_button, copyShortLink_button, saveButton;
+    private Button shortLink_button, copyShortLink_button, saveButton;
     private RelativeLayout shortLink_layout;
     private MaterialToolbar toolbar;
 
@@ -32,33 +34,59 @@ public class AddNoteActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_note);
 
         title = findViewById(R.id.addTitle_InputEdit);
+        title_layout = findViewById(R.id.addTitle_inputLayout);
         link = findViewById(R.id.addLink_inputEdit);
+        link_layout = findViewById(R.id.addLink_inputLayout);
         shortLink = findViewById(R.id.addShortLink_inputEdit);
         secretNote = findViewById(R.id.addSecretNote_inputEdit);
         visibleNote = findViewById(R.id.addVisibleNote_InputEdit);
         shortLink_button = findViewById(R.id.addGenerate_shortlink);
         shortLink_layout = findViewById(R.id.addShortLink_layout);
-        copyLink_button = findViewById(R.id.addCopyLink_button);
         copyShortLink_button = findViewById(R.id.addCopyShortLink_button);
         toolbar = findViewById(R.id.materialToolbar_add);
         saveButton = findViewById(R.id.addSave_button);
 
-        NoteDao dao = new NoteDao();
-        saveButton.setOnClickListener(view -> {
-            if (!title.getText().toString().equals("") || !link.getText().toString().equals("")) {
-                UrlNoteData urlNoteData = new UrlNoteData(dao.readId(), title.getText().toString(), link.getText().toString(), shortLink.getText().toString(), secretNote.getText().toString(), visibleNote.getText().toString());
-                dao.addNote(urlNoteData).addOnSuccessListener(success -> {
-                    Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show();
-                }).addOnFailureListener(error -> {
-                    Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show();
-                });
-            } else {
-                Toast.makeText(getApplicationContext(), "Title and Link could not empty", Toast.LENGTH_SHORT).show();
-            }
-        });
-
         toolbarClicked();
         copyLink();
+        addNewNote();
+    }
+
+    private void addNewNote() {
+        NoteDao dao = new NoteDao();
+        saveButton.setOnClickListener(view -> {
+            if (!title.getText().toString().equals("") && !link.getText().toString().equals("")) {
+                UrlNoteData urlNoteData = new UrlNoteData(dao.readId(), title.getText().toString(), link.getText().toString(), shortLink.getText().toString(), secretNote.getText().toString(), visibleNote.getText().toString());
+                dao.addNote(urlNoteData)
+                        .addOnSuccessListener(success -> Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show())
+                        .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show());
+
+                title.setText("");
+                link.setText("");
+                shortLink.setText("");
+                secretNote.setText("");
+                visibleNote.setText("");
+                title_layout.setErrorEnabled(false);
+                link_layout.setErrorEnabled(false);
+            } else {
+                if (!title.getText().toString().equals("")) {
+                    title_layout.setErrorEnabled(false);
+                }
+
+                if (!link.getText().toString().equals("")) {
+                    link_layout.setErrorEnabled(false);
+                }
+
+                if (title.getText().toString().equals("")) {
+                    title_layout.setErrorEnabled(true);
+                    title_layout.setError("Title could not be blank");
+                }
+
+                if (link.getText().toString().equals("")) {
+                    link_layout.setErrorEnabled(true);
+                    link_layout.setError("Link could not be blank");
+                }
+            }
+        });
     }
 
     private void toolbarClicked() {
@@ -66,13 +94,6 @@ public class AddNoteActivity extends AppCompatActivity {
     }
 
     private void copyLink() {
-        copyLink_button.setOnClickListener(view -> {
-            ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("link", link.getText());
-            clipboard.setPrimaryClip(clip);
-            Toast.makeText(getApplicationContext(), "Link copied", Toast.LENGTH_LONG).show();
-        });
-
         copyShortLink_button.setOnClickListener(view -> {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("short_link", shortLink.getText());

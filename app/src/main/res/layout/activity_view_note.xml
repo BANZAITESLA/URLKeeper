@@ -50,6 +50,7 @@
 
                 app:boxBackgroundColor="@color/brown90"
                 app:boxStrokeColor="@color/japan"
+                app:endIconMode="clear_text"
 
                 android:hint="@string/title"
                 android:textColorHint="@color/japan"
@@ -83,6 +84,7 @@
 
                         app:boxBackgroundColor="@color/brown90"
                         app:boxStrokeColor="@color/japan"
+                        app:endIconMode="clear_text"
 
                         android:hint="@string/link"
                         android:textColorHint="@color/japan"
@@ -227,6 +229,7 @@
 
                     app:boxBackgroundColor="@color/brown90"
                     app:boxStrokeColor="@color/japan"
+                    app:endIconMode="clear_text"
 
                     android:hint="@string/visible_note"
                     android:textColorHint="@color/japan"

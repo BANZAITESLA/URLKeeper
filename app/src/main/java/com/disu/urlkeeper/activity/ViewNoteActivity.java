@@ -78,7 +78,7 @@ public class ViewNoteActivity extends AppCompatActivity {
                     secretNote.setText(url.getSecret_note());
                     visibleNote.setText(url.getVisible_note());
 
-                    if (dataSnapshot.child("short_url").exists() && url.getShort_url().equals("0")) {
+                    if (dataSnapshot.child("short_url").exists() && url.getShort_url().equals("")) {
                         shortLink_button.setVisibility(View.GONE);
                         shortLink_layout.setVisibility(View.VISIBLE);
                         shortLink.setText(url.getShort_url());
