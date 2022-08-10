@@ -26,6 +26,8 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -43,6 +45,8 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
     Query databaseReference;
     UrlNoteData url;
     NoteDao dao = new NoteDao();
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
 
     public UrlManagerAdapter(@NonNull FirebaseRecyclerOptions<UrlNoteData> options) {
         super(options);
@@ -56,8 +60,11 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
 
         holder.star_check.setChecked(model.isStar());
 
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+
         holder.star_check.setOnClickListener(view -> {
-            databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child("user1");
+            databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child(mCurrentUser.getUid());
             databaseReference.orderByChild("id").equalTo(model.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -12,6 +12,8 @@ import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -45,6 +47,8 @@ public class ViewNoteActivity extends AppCompatActivity {
     UrlNoteData url;
     String id;
     NoteDao dao = new NoteDao();
+    private FirebaseAuth mAuth;
+    private FirebaseUser mCurrentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,16 +69,18 @@ public class ViewNoteActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.materialToolbar);
         save_button = findViewById(R.id.save_button);
 
+        mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+
         id = getIntent().getStringExtra("id");
 
         getData();
         copyLink();
         toolbarClicked();
-        invalidateOptionsMenu();
     }
 
     private void getData() { // get data by id
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child("user1");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child(mCurrentUser.getUid());
         databaseReference.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -155,7 +161,7 @@ public class ViewNoteActivity extends AppCompatActivity {
     }
 
     private void deleteData() {
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child("user1");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child(mCurrentUser.getUid());
         databaseReference.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -177,12 +183,13 @@ public class ViewNoteActivity extends AppCompatActivity {
     }
 
     private void starData(MenuItem item) {
-        databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child("user1");
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child(mCurrentUser.getUid());
         databaseReference.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     String key = dataSnapshot.getKey();
+                    url = dataSnapshot.getValue(UrlNoteData.class);
                     boolean star = url.isStar();
 
                     HashMap<String, Object> hashMap = new HashMap<>();

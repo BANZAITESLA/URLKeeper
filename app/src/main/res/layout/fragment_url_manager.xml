@@ -57,6 +57,7 @@
                     app:hintTextAppearance="@style/TextAppearance.Material3.BodyMedium">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/search_text"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
 

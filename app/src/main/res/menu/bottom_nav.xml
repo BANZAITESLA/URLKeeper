@@ -3,17 +3,12 @@
 <!-- 30/07/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6 -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:id="@+id/menu_tag"
-        android:enabled="true"
-        android:icon="@drawable/ic_tags_solid"
-        android:title="@string/categories" />
 
     <item
-        android:id="@+id/menu_home"
+        android:id="@+id/starring"
         android:enabled="true"
-        android:icon="@drawable/ic_house_solid"
-        android:title="@string/home" />
+        android:icon="@drawable/ic_star_solid"
+        android:title="@string/star" />
 
     <item
         android:id="@+id/menu_url"
