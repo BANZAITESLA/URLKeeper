@@ -1,5 +1,6 @@
 package com.disu.urlkeeper.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.disu.urlkeeper.R;
 import com.disu.urlkeeper.dao.NoteDao;
@@ -7,7 +8,6 @@ import com.disu.urlkeeper.data.UrlNoteData;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
-import com.google.firebase.database.ServerValue;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -21,10 +21,18 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import java.text.DateFormat;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class AddNoteActivity extends AppCompatActivity {
 
@@ -54,6 +62,7 @@ public class AddNoteActivity extends AppCompatActivity {
 
         toolbarClicked();
         copyLink();
+        generateSl();
         addNewNote();
     }
 
@@ -95,6 +104,61 @@ public class AddNoteActivity extends AppCompatActivity {
         });
     }
 
+    private void generateSl() {
+        shortLink_button.setOnClickListener(view -> {
+            String user_link = link.getText().toString();
+            OkHttpClient client = new OkHttpClient();
+
+            if (!user_link.equals("")) {
+                if (user_link.contains("http")) {
+                    user_link = link.getText().toString();
+                } else {
+                    user_link = "https://" + link.getText().toString();
+                }
+
+                RequestBody body = new FormBody.Builder()
+                        .add("url", user_link)
+                        .build();
+
+                Request request = new Request.Builder()
+                        .url("https://url-shortener-service.p.rapidapi.com/shorten")
+                        .post(body)
+                        .addHeader("content-type", "application/x-www-form-urlencoded")
+                        .addHeader("X-RapidAPI-Key", "ebd20afc97msh3a4d4fb79278238p16ffa7jsn1db609ad96a0")
+                        .addHeader("X-RapidAPI-Host", "url-shortener-service.p.rapidapi.com")
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {}
+
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            final String url_response = response.body().string();
+                            AddNoteActivity.this.runOnUiThread(() -> {
+                                try {
+                                    JSONObject json = new JSONObject(url_response);
+                                    shortLink.setText(json.getString("result_url"));
+                                    shortLink_button.setVisibility(View.GONE);
+                                    shortLink_layout.setVisibility(View.VISIBLE);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            });
+                        } else {
+                            AddNoteActivity.this.runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Link invalid", Toast.LENGTH_SHORT).show());
+                        }
+                    }
+                });
+            } else {
+                Toast.makeText(getApplicationContext(), "Insert link first", Toast.LENGTH_SHORT).show();
+                shortLink_button.setVisibility(View.VISIBLE);
+                shortLink_layout.setVisibility(View.GONE);
+            }
+        });
+    }
+
     private void toolbarClicked() {
         toolbar.setNavigationOnClickListener(view -> finish());
     }
@@ -104,7 +168,7 @@ public class AddNoteActivity extends AppCompatActivity {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("short_link", shortLink.getText());
             clipboard.setPrimaryClip(clip);
-            Toast.makeText(getApplicationContext(), "Short link copied", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Short link copied", Toast.LENGTH_SHORT).show();
         });
     }
 
