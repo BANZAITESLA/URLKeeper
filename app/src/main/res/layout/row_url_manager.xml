@@ -10,7 +10,7 @@
     android:layout_marginBottom="20dp"
 
     app:cardBackgroundColor="@color/brown90"
-    app:strokeColor="@color/japan" >
+    app:strokeColor="@color/japan">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -27,6 +27,7 @@
                 android:id="@+id/title_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxLines="2"
                 android:layout_alignParentStart="true"
                 android:layout_toStartOf="@id/star_check"
                 android:text="@string/title"
@@ -65,7 +66,7 @@
                 android:id="@+id/link_inputLayout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toStartOf="@+id/copyLink_button"
+                android:layout_toStartOf="@+id/browse_button"
                 android:layout_centerInParent="true"
                 android:layout_marginEnd="5dp"
 
@@ -91,39 +92,23 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
-                android:id="@+id/copyLink_button"
+                android:id="@+id/browse_button"
                 style="@style/Widget.Material3.Button.ElevatedButton.Icon"
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="5dp"
 
-                android:backgroundTint="@color/coral80"
+                android:backgroundTint="@color/japan"
                 android:paddingTop="18dp"
                 android:paddingBottom="19dp"
 
                 android:visibility="visible"
-                app:icon="@drawable/ic_clone_solid"
+                app:icon="@drawable/ic_globe_solid"
                 app:iconTint="@color/white"
                 app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium" />
 
         </RelativeLayout>
-
-        <TextView
-            android:id="@+id/lastEdited_note"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/linkView_layout"
-            android:layout_alignParentStart="true"
-            android:drawablePadding="5dp"
-
-            android:gravity="center"
-            android:text="@string/last_edited"
-            android:textAppearance="?attr/textAppearanceBodySmall"
-
-            android:textColor="@color/japan80"
-            app:drawableStartCompat="@drawable/ic_clock_rotate_left_solid"
-            app:drawableTint="@color/japan90" />
 
     </RelativeLayout>
 

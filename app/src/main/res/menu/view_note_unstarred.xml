@@ -13,10 +13,22 @@
         android:checkable="true"/>
 
     <item
+        android:id="@+id/browse_view"
+        android:icon="@drawable/ic_globe_solid"
+        android:title="@string/browse"
+        android:contentDescription="@string/browse"
+        app:showAsAction="ifRoom" />
+
+    <item
         android:id="@+id/delete_view"
         android:icon="@drawable/ic_trash_solid"
         android:title="@string/delete"
-        android:contentDescription="@string/delete"
-        app:showAsAction="ifRoom" />
+        android:contentDescription="@string/delete" />
+
+    <item
+        android:id="@+id/delete_shortLink_view"
+        android:icon="@drawable/ic_trash_solid"
+        android:title="@string/delete_sl"
+        android:contentDescription="@string/delete_sl"/>
 
 </menu>

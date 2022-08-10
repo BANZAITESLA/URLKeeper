@@ -3,6 +3,8 @@ package com.disu.urlkeeper.activity;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.view.Menu;
 import android.view.MenuItem;
 import com.disu.urlkeeper.R;
@@ -107,8 +109,13 @@ public class ViewNoteActivity extends AppCompatActivity {
                     if (url.isStar()) {
                         toolbar.inflateMenu(R.menu.view_note_starred);
                     } else {
-
                         toolbar.inflateMenu(R.menu.view_note_unstarred);
+                    }
+
+                    if (url.getShort_url().equals("")) {
+                        toolbar.getMenu().findItem(R.id.delete_shortLink_view).setEnabled(false).setVisible(false);
+                    } else {
+                        toolbar.getMenu().findItem(R.id.delete_shortLink_view).setEnabled(true).setVisible(true);
                     }
                 }
             }
@@ -126,7 +133,7 @@ public class ViewNoteActivity extends AppCompatActivity {
                 HashMap<String, Object> hashMap = new HashMap<>();
                 hashMap.put("title", title.getText().toString());
                 hashMap.put("url", link.getText().toString());
-                hashMap.put("short_url", link.getText().toString());
+                hashMap.put("short_url", shortLink.getText().toString());
                 hashMap.put("secret_note", secretNote.getText().toString());
                 hashMap.put("visible_note", visibleNote.getText().toString());
                 dao.updateNote(key, hashMap)
@@ -221,6 +228,43 @@ public class ViewNoteActivity extends AppCompatActivity {
         });
     }
 
+    private void browse() {
+        Intent url = new Intent(Intent.ACTION_VIEW);
+        if (link.getText().toString().contains("http")) {
+            url.setData(Uri.parse(link.getText().toString()));
+        } else {
+            url.setData(Uri.parse("https://" + link.getText().toString()));
+        }
+        this.startActivity(url);
+    }
+
+    private void deleteShortlink() {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child(mCurrentUser.getUid());
+        databaseReference.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String key = dataSnapshot.getKey();
+
+                    HashMap<String, Object> hashMap = new HashMap<>();
+                    hashMap.put("short_url", "");
+
+                    dao.updateNote(key, hashMap)
+                            .addOnSuccessListener(success -> {
+                                shortLink_button.setVisibility(View.VISIBLE);
+                                shortLink_layout.setVisibility(View.GONE);
+                                Toast.makeText(getApplicationContext(), "Removed!", Toast.LENGTH_SHORT).show(); })
+                            .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
     private void copyLink() {
         copyLink_button.setOnClickListener(view -> {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
@@ -238,15 +282,20 @@ public class ViewNoteActivity extends AppCompatActivity {
     }
 
     private void toolbarClicked() {
-
         toolbar.setNavigationOnClickListener(view -> finish());
         toolbar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.star_view:
                     starData(item);
                     break;
+                case R.id.browse_view:
+                    browse();
+                    break;
                 case R.id.delete_view:
                     dialogDelete();
+                    break;
+                case R.id.delete_shortLink_view:
+                    deleteShortlink();
                     break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + item.getItemId());

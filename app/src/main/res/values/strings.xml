@@ -8,7 +8,6 @@
     <string name="link">Link</string>
     <string name="short_link">Shorten Link</string>
     <string name="generate_sl">Generate Short Link</string>
-    <string name="last_edited">Last edited : %1$s</string>
     <string name="favorite">Favorite</string>
     <string name="delete">Delete</string>
     <string name="share">Share</string>
@@ -18,10 +17,8 @@
     <string name="delete_title_dialog">Delete this note?</string>
     <string name="delete_message_dialog">A deleted note could not be restored.</string>
     <string name="cancel">Cancel</string>
-    <string name="connect">Sign in</string>
-    <string name="sign_in_message">You have to sign in (anonymously) to use all feature.</string>
-    <string name="sign_in">Go ahead</string>
     <string name="star">Star URL</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="browse">Browse</string>
+    <string name="delete_sl">Remove short link</string>
+    <string name="delete_note">Delete note</string>
 </resources>

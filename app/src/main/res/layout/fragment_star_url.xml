@@ -22,7 +22,7 @@
                 android:layout_marginTop="10dp">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/urlNote_recylerView"
+                    android:id="@+id/urlStar_recylerView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 

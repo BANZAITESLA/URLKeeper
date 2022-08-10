@@ -7,6 +7,7 @@ import com.disu.urlkeeper.data.UrlNoteData;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.database.ServerValue;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -19,6 +20,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class AddNoteActivity extends AppCompatActivity {
 

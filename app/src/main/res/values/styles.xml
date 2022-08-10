@@ -41,7 +41,7 @@
         <item name="colorSecondary">@color/japan</item>
         <item name="colorOnSecondary">@color/white</item>
 
-        <item name="colorSurface">@color/coral</item>
+        <item name="colorSurface">@color/japan</item>
         <item name="colorOnSurface">@color/japan90</item>
         <item name="colorOnSurfaceVariant">@color/japan90</item>
 
@@ -49,6 +49,7 @@
         <item name="colorOnSecondaryContainer">@color/white</item>
 
         <item name="colorError">@color/error</item>
+        <item name="android:textColor">@color/japan</item>
 
         <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>

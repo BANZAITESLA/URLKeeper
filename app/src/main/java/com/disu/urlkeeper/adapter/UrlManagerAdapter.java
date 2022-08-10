@@ -4,6 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 /**
@@ -56,7 +58,6 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
     protected void onBindViewHolder(@NonNull UrlManagerAdapter.ViewHolder holder, int position, @NonNull UrlNoteData model) {
         holder.title.setText(model.getTitle());
         holder.link.setHint(model.getUrl());
-        holder.last.setText(String.format("Last edited : %s", model.getLast_edited()));
 
         holder.star_check.setChecked(model.isStar());
 
@@ -109,11 +110,14 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
             holder.itemView.getContext().startActivity(intent);
         });
 
-        holder.copyLink_button.setOnClickListener(view -> {
-            ClipboardManager clipboard = (ClipboardManager) holder.copyLink_button.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-            ClipData clip = ClipData.newPlainText("link", holder.link.getHint());
-            clipboard.setPrimaryClip(clip);
-            Toast.makeText(holder.copyLink_button.getContext(), "Link copied", Toast.LENGTH_SHORT).show();
+        holder.browse.setOnClickListener(view -> {
+            Intent link = new Intent(Intent.ACTION_VIEW);
+            if (model.getUrl().contains("http")) {
+                link.setData(Uri.parse(model.getUrl()));
+            } else {
+                link.setData(Uri.parse("https://" + model.getUrl()));
+            }
+            holder.browse.getContext().startActivity(link);
         });
     }
 
@@ -127,17 +131,14 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView title;
         TextInputLayout link;
-        TextView last;
-        Button copyLink_button;
+        Button browse;
         CheckBox star_check;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             title = itemView.findViewById(R.id.title_note);
             link = itemView.findViewById(R.id.link_inputLayout);
-            last = itemView.findViewById(R.id.lastEdited_note);
-            copyLink_button = itemView.findViewById(R.id.copyLink_button);
+            browse = itemView.findViewById(R.id.browse_button);
             star_check = itemView.findViewById(R.id.star_check);
         }
     }

@@ -1,5 +1,7 @@
 package com.disu.urlkeeper.data;
 
+import java.util.Map;
+
 /**
  * 06/08/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6
  */
@@ -11,8 +13,6 @@ public class UrlNoteData {
     private String short_url;
     private String secret_note;
     private String visible_note;
-    private String last_edited;
-    private String categories;
     private boolean star;
 
 
@@ -74,22 +74,6 @@ public class UrlNoteData {
 
     public void setVisible_note(String visible_note) {
         this.visible_note = visible_note;
-    }
-
-    public String getLast_edited() {
-        return last_edited;
-    }
-
-    public void setLast_edited(String last_edited) {
-        this.last_edited = last_edited;
-    }
-
-    public String getCategories() {
-        return categories;
-    }
-
-    public void setCategories(String categories) {
-        this.categories = categories;
     }
 
     public boolean isStar() {
