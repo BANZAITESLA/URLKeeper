@@ -32,8 +32,6 @@ public class UrlManagerFragment extends Fragment {
 
     RecyclerView recyclerViewNoteList;
     UrlManagerAdapter adapter;
-    Button copyLink_button;
-    TextInputLayout link;
 
     public UrlManagerFragment() {}
 
