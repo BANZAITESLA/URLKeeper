@@ -2,8 +2,10 @@ package com.disu.urlkeeper.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 
+import android.content.DialogInterface;
 import android.view.MenuItem;
 import com.disu.urlkeeper.R;
 import com.disu.urlkeeper.dao.NoteDao;
@@ -11,6 +13,7 @@ import com.disu.urlkeeper.data.UrlNoteData;
 import com.disu.urlkeeper.fragment.UrlManagerFragment;
 import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -46,6 +49,7 @@ public class ViewNoteActivity extends AppCompatActivity {
     private MaterialToolbar toolbar;
     UrlNoteData url;
     String id;
+    NoteDao dao = new NoteDao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,8 +112,6 @@ public class ViewNoteActivity extends AppCompatActivity {
     }
 
     private void updateData(String key) {
-        NoteDao dao = new NoteDao();
-
         save_button.setOnClickListener(view -> {
             if (!title.getText().toString().equals("") && !link.getText().toString().equals("")) {
                 HashMap<String, Object> hashMap = new HashMap<>();
@@ -118,7 +120,8 @@ public class ViewNoteActivity extends AppCompatActivity {
                 hashMap.put("short_url", link.getText().toString());
                 hashMap.put("secret_note", secretNote.getText().toString());
                 hashMap.put("visible_note", visibleNote.getText().toString());
-                dao.updateNote(key, hashMap).addOnSuccessListener(success -> Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show())
+                dao.updateNote(key, hashMap)
+                        .addOnSuccessListener(success -> Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show());
 
                 title_layout.setErrorEnabled(false);
@@ -146,6 +149,29 @@ public class ViewNoteActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void deleteData() {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child("user1");
+        databaseReference.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String key = dataSnapshot.getKey();
+                    dao.removeNote(key)
+                            .addOnSuccessListener(success -> {
+                                Toast.makeText(getApplicationContext(), "Deleted!", Toast.LENGTH_SHORT).show();
+                                finish();
+                            })
+                            .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -167,22 +193,27 @@ public class ViewNoteActivity extends AppCompatActivity {
 
     private void toolbarClicked() {
         toolbar.setNavigationOnClickListener(view -> finish());
+        toolbar.setOnMenuItemClickListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.star_view:
+                    Toast.makeText(getApplicationContext(), "Short link copiedd", Toast.LENGTH_LONG).show();
+                    return true;
+                case R.id.delete_view:
+                    dialogDelete();
+                    return true;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + item.getItemId());
+            }
+        });
     }
 
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.star_view:
-//                fragment = new UrlManagerFragment();
-                break;
-//            case R.id.menu_tag:
-////                fragment = new UrlManagerFragment();
-//                break;
-            case R.id.menu_url:
-//                fragment = new UrlManagerFragment();
-                break;
-        }
-        return super.onOptionsItemSelected(item);
+    private void dialogDelete() {
+        new MaterialAlertDialogBuilder(ViewNoteActivity.this, R.style.ThemeOverlay_App_MaterialAlertDialog)
+                .setTitle(R.string.delete_title_dialog)
+                .setMessage(R.string.delete_message_dialog)
+                .setPositiveButton(R.string.delete, (dialogInterface, i) -> deleteData())
+                .setNegativeButton(R.string.cancel, (dialogInterface, i) -> {})
+                .show();
     }
 
     @Override

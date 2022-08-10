@@ -17,4 +17,7 @@
     <string name="secret_note">Secret Note</string>
     <string name="visible_note">Note</string>
     <string name="save">Save</string>
+    <string name="delete_title_dialog">Delete this note?</string>
+    <string name="delete_message_dialog">A deleted note could not be restored.</string>
+    <string name="cancel">Cancel</string>
 </resources>

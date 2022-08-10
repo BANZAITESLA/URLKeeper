@@ -21,7 +21,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
 
-                app:menu="@menu/view_note"
+                app:menu="@menu/add_note"
                 app:navigationIcon="@drawable/ic_angle_left_solid"
                 style="@style/Widget.App.Toolbar"/>
 
