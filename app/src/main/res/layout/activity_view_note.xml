@@ -21,7 +21,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
 
-                    app:menu="@menu/view_note"
                     app:navigationIcon="@drawable/ic_angle_left_solid"
                     style="@style/Widget.App.Toolbar"/>
 
@@ -119,7 +118,6 @@
                         app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium" />
 
                 </RelativeLayout>
-
 
                 <Button
                     android:id="@+id/generate_shortlink"

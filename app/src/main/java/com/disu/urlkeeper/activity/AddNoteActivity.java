@@ -55,7 +55,7 @@ public class AddNoteActivity extends AppCompatActivity {
         NoteDao dao = new NoteDao();
         saveButton.setOnClickListener(view -> {
             if (!title.getText().toString().equals("") && !link.getText().toString().equals("")) {
-                UrlNoteData urlNoteData = new UrlNoteData(dao.readId(), title.getText().toString(), link.getText().toString(), shortLink.getText().toString(), secretNote.getText().toString(), visibleNote.getText().toString());
+                UrlNoteData urlNoteData = new UrlNoteData(dao.readId(), title.getText().toString(), link.getText().toString(), shortLink.getText().toString(), secretNote.getText().toString(), visibleNote.getText().toString(), false);
                 dao.addNote(urlNoteData)
                         .addOnSuccessListener(success -> Toast.makeText(getApplicationContext(), "Saved!", Toast.LENGTH_SHORT).show())
                         .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show());

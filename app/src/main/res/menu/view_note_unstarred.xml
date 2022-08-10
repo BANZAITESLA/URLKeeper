@@ -1,14 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<!-- 10/08/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6 -->
+<!-- 07/08/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6 -->
 
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/star_view"
-        android:icon="@drawable/star_state"
+        android:icon="@drawable/ic_star_regular"
         android:title="@string/favorite"
         android:contentDescription="@string/favorite"
         app:showAsAction="ifRoom"
         android:checkable="true"/>
+
+    <item
+        android:id="@+id/delete_view"
+        android:icon="@drawable/ic_trash_solid"
+        android:title="@string/delete"
+        android:contentDescription="@string/delete"
+        app:showAsAction="ifRoom" />
+
 </menu>

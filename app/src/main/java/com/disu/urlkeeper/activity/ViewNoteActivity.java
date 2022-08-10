@@ -2,16 +2,12 @@ package com.disu.urlkeeper.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.fragment.app.Fragment;
 
-import android.content.DialogInterface;
+import android.view.Menu;
 import android.view.MenuItem;
 import com.disu.urlkeeper.R;
 import com.disu.urlkeeper.dao.NoteDao;
 import com.disu.urlkeeper.data.UrlNoteData;
-import com.disu.urlkeeper.fragment.UrlManagerFragment;
-import com.google.android.material.appbar.CollapsingToolbarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
@@ -22,22 +18,20 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.HashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ViewNoteActivity extends AppCompatActivity {
 
@@ -47,6 +41,7 @@ public class ViewNoteActivity extends AppCompatActivity {
     private Button shortLink_button, copyLink_button, copyShortLink_button, save_button;
     private RelativeLayout shortLink_layout;
     private MaterialToolbar toolbar;
+    private boolean star;
     UrlNoteData url;
     String id;
     NoteDao dao = new NoteDao();
@@ -75,6 +70,7 @@ public class ViewNoteActivity extends AppCompatActivity {
         getData();
         copyLink();
         toolbarClicked();
+        invalidateOptionsMenu();
     }
 
     private void getData() { // get data by id
@@ -90,6 +86,7 @@ public class ViewNoteActivity extends AppCompatActivity {
                     link.setText(url.getUrl());
                     secretNote.setText(url.getSecret_note());
                     visibleNote.setText(url.getVisible_note());
+                    star = url.isStar();
 
                     if (dataSnapshot.child("short_url").exists() && !url.getShort_url().equals("")) {
                         shortLink_button.setVisibility(View.GONE);
@@ -101,6 +98,12 @@ public class ViewNoteActivity extends AppCompatActivity {
                     }
 
                     updateData(key);
+                    if (url.isStar()) {
+                        toolbar.inflateMenu(R.menu.view_note_starred);
+                    } else {
+
+                        toolbar.inflateMenu(R.menu.view_note_unstarred);
+                    }
                 }
             }
 
@@ -161,8 +164,7 @@ public class ViewNoteActivity extends AppCompatActivity {
                     dao.removeNote(key)
                             .addOnSuccessListener(success -> {
                                 Toast.makeText(getApplicationContext(), "Deleted!", Toast.LENGTH_SHORT).show();
-                                finish();
-                            })
+                                finish(); })
                             .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show());
                 }
             }
@@ -172,7 +174,44 @@ public class ViewNoteActivity extends AppCompatActivity {
 
             }
         });
+    }
 
+    private void starData(MenuItem item) {
+        databaseReference = FirebaseDatabase.getInstance().getReference().child("note").child("user1");
+        databaseReference.orderByChild("id").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+                    String key = dataSnapshot.getKey();
+                    boolean star = url.isStar();
+
+                    HashMap<String, Object> hashMap = new HashMap<>();
+
+                    if (!star) {
+                        hashMap.put("star", true);
+                        dao.updateNote(key, hashMap)
+                                .addOnSuccessListener(success -> {
+                                    url.setStar(true);
+                                    item.setIcon(R.drawable.ic_star_solid);
+                                    Toast.makeText(getApplicationContext(), "Starred!", Toast.LENGTH_SHORT).show();})
+                                .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show());
+                    } else {
+                        hashMap.put("star", false);
+                        dao.updateNote(key, hashMap)
+                                .addOnSuccessListener(success -> {
+                                    url.setStar(false);
+                                    item.setIcon(R.drawable.ic_star_regular);
+                                    Toast.makeText(getApplicationContext(), "Unstarred!", Toast.LENGTH_SHORT).show(); })
+                                .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     private void copyLink() {
@@ -180,30 +219,32 @@ public class ViewNoteActivity extends AppCompatActivity {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("link", link.getText());
             clipboard.setPrimaryClip(clip);
-            Toast.makeText(getApplicationContext(), "Link copied", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Link copied", Toast.LENGTH_SHORT).show();
         });
 
         copyShortLink_button.setOnClickListener(view -> {
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             ClipData clip = ClipData.newPlainText("short_link", shortLink.getText());
             clipboard.setPrimaryClip(clip);
-            Toast.makeText(getApplicationContext(), "Short link copied", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Short link copied", Toast.LENGTH_SHORT).show();
         });
     }
 
     private void toolbarClicked() {
+
         toolbar.setNavigationOnClickListener(view -> finish());
         toolbar.setOnMenuItemClickListener(item -> {
             switch (item.getItemId()) {
                 case R.id.star_view:
-                    Toast.makeText(getApplicationContext(), "Short link copiedd", Toast.LENGTH_LONG).show();
-                    return true;
+                    starData(item);
+                    break;
                 case R.id.delete_view:
                     dialogDelete();
-                    return true;
+                    break;
                 default:
                     throw new IllegalStateException("Unexpected value: " + item.getItemId());
             }
+            return false;
         });
     }
 

@@ -1,10 +1,13 @@
 package com.disu.urlkeeper.adapter;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -47,6 +50,13 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
             intent.putExtra("id", model.getId());
             holder.itemView.getContext().startActivity(intent);
         });
+
+        holder.copyLink_button.setOnClickListener(view -> {
+            ClipboardManager clipboard = (ClipboardManager) holder.copyLink_button.getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("link", holder.link.getHint());
+            clipboard.setPrimaryClip(clip);
+            Toast.makeText(holder.copyLink_button.getContext(), "Link copied", Toast.LENGTH_SHORT).show();
+        });
     }
 
     @NonNull
@@ -60,13 +70,15 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
         TextView title;
         TextInputLayout link;
         TextView last;
+        Button copyLink_button;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             title = itemView.findViewById(R.id.title_note);
-            link = itemView.findViewById(R.id.link_textField);
+            link = itemView.findViewById(R.id.link_inputLayout);
             last = itemView.findViewById(R.id.lastEdited_note);
+            copyLink_button = itemView.findViewById(R.id.copyLink_button);
         }
     }
 }

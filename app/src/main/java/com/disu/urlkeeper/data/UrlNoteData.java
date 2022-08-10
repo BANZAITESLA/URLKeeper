@@ -13,17 +13,19 @@ public class UrlNoteData {
     private String visible_note;
     private String last_edited;
     private String categories;
+    private boolean star;
 
 
     public UrlNoteData(){} // for firebase
 
-    public UrlNoteData(String id, String title, String url, String short_url, String secret_note, String visible_note) {
+    public UrlNoteData(String id, String title, String url, String short_url, String secret_note, String visible_note, boolean star) {
         this.id = id;
         this.title = title;
         this.url = url;
         this.short_url = short_url;
         this.secret_note = secret_note;
         this.visible_note = visible_note;
+        this.star = star;
     }
 
     public String getId() {
@@ -88,5 +90,13 @@ public class UrlNoteData {
 
     public void setCategories(String categories) {
         this.categories = categories;
+    }
+
+    public boolean isStar() {
+        return star;
+    }
+
+    public void setStar(boolean star) {
+        this.star = star;
     }
 }

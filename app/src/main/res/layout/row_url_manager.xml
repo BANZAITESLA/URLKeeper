@@ -53,43 +53,67 @@
             android:layout_marginBottom="3dp"
             android:background="@color/japan80" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/link_textField"
+        <RelativeLayout
+            android:id="@+id/linkView_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/title_divider"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp">
 
-            android:paddingBottom="10dp"
-
-            app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Small"
-            app:endIconMode="custom"
-            app:endIconDrawable="@drawable/ic_clone_solid"
-            app:endIconTint="@color/coral80"
-
-            app:boxBackgroundColor="@color/cc"
-            app:boxStrokeColor="@color/japan"
-
-            android:hint="@string/link"
-            android:textColorHint="@color/japan90"
-            app:hintTextColor="@color/japan90"
-            app:hintTextAppearance="@style/TextAppearance.Material3.BodyMedium"
-
-            android:enabled="false" >
-
-            <com.google.android.material.textfield.TextInputEditText
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/link_inputLayout"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/copyLink_button"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="5dp"
 
-                android:maxLines="1"
-                android:inputType="text" />
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium"
 
-        </com.google.android.material.textfield.TextInputLayout>
+                app:boxBackgroundColor="@color/cc"
+                app:boxStrokeColor="@color/japan"
+
+                android:hint="@string/link"
+                android:textColorHint="@color/japan"
+                app:hintTextColor="@color/japan"
+                app:hintTextAppearance="@style/TextAppearance.Material3.BodySmall">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/linkView_inputEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+
+                    android:inputType="text"
+                    android:textCursorDrawable="@drawable/cursor" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/copyLink_button"
+                style="@style/Widget.Material3.Button.ElevatedButton.Icon"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="5dp"
+
+                android:backgroundTint="@color/coral80"
+                android:paddingTop="18dp"
+                android:paddingBottom="19dp"
+
+                android:visibility="visible"
+                app:icon="@drawable/ic_clone_solid"
+                app:iconTint="@color/white"
+                app:shapeAppearance="@style/ShapeAppearance.Material3.Corner.Medium" />
+
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/lastEdited_note"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/link_textField"
+            android:layout_below="@id/linkView_layout"
             android:layout_alignParentStart="true"
             android:drawablePadding="5dp"
 

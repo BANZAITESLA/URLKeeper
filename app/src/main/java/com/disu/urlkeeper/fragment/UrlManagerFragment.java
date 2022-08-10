@@ -1,5 +1,8 @@
 package com.disu.urlkeeper.fragment;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -12,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.disu.urlkeeper.customization.CustomLinearLayoutManager;
 import com.disu.urlkeeper.R;
@@ -20,11 +25,15 @@ import com.disu.urlkeeper.adapter.UrlManagerAdapter;
 import com.disu.urlkeeper.data.UrlNoteData;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class UrlManagerFragment extends Fragment {
+
     RecyclerView recyclerViewNoteList;
     UrlManagerAdapter adapter;
+    Button copyLink_button;
+    TextInputLayout link;
 
     public UrlManagerFragment() {}
 
@@ -46,12 +55,15 @@ public class UrlManagerFragment extends Fragment {
 
         adapter = new UrlManagerAdapter(options);
         recyclerViewNoteList.setAdapter(adapter);
+
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
 
         FloatingActionButton add = (FloatingActionButton) getView().findViewById(R.id.addNote_FAB);
         add.setOnClickListener(view1 -> {
