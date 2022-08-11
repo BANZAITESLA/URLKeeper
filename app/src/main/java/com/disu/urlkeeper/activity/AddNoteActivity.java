@@ -2,9 +2,13 @@ package com.disu.urlkeeper.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.disu.urlkeeper.BuildConfig;
 import com.disu.urlkeeper.R;
 import com.disu.urlkeeper.dao.NoteDao;
+import com.disu.urlkeeper.data.KeyData;
 import com.disu.urlkeeper.data.UrlNoteData;
+import com.google.android.gms.common.api.internal.ApiKey;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -12,6 +16,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -41,6 +47,8 @@ public class AddNoteActivity extends AppCompatActivity {
     private Button shortLink_button, copyShortLink_button, saveButton;
     private RelativeLayout shortLink_layout;
     private MaterialToolbar toolbar;
+
+    KeyData key = new KeyData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +132,7 @@ public class AddNoteActivity extends AppCompatActivity {
                         .url("https://url-shortener-service.p.rapidapi.com/shorten")
                         .post(body)
                         .addHeader("content-type", "application/x-www-form-urlencoded")
-                        .addHeader("X-RapidAPI-Key", "ebd20afc97msh3a4d4fb79278238p16ffa7jsn1db609ad96a0")
+                        .addHeader("X-RapidAPI-Key", key.getKey())
                         .addHeader("X-RapidAPI-Host", "url-shortener-service.p.rapidapi.com")
                         .build();
 
@@ -146,6 +154,8 @@ public class AddNoteActivity extends AppCompatActivity {
                                     e.printStackTrace();
                                 }
                             });
+
+                            response.body().close();
                         } else {
                             AddNoteActivity.this.runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Link invalid", Toast.LENGTH_SHORT).show());
                         }
