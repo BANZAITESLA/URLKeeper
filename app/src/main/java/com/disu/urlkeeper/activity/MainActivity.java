@@ -26,29 +26,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity implements NavigationBarView.OnItemSelectedListener {
-
     private FirebaseAuth mAuth;
-    private FirebaseUser mCurrentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//      firebase authentication initial
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
-
-        if (mCurrentUser == null) { // if current user null (unregistered in firebase)
-            mAuth.signInAnonymously()
-                    .addOnCompleteListener(this, task -> {
-                        if (task.isSuccessful()) {
-                            Log.d(TAG, "signInAnonymously:success");
-                        } else {
-                            Log.w(TAG, "signInAnonymously:failure", task.getException());
-                        }
-                    });
-        }
 
         BottomNavigationView bottom_nav = findViewById(R.id.bottomNavigationView);
         bottom_nav.setOnItemSelectedListener(this);
@@ -82,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     }
 
     @Override // hide keyboard and change focus
-    public boolean dispatchTouchEvent(MotionEvent event) { // hide keyboard and change focus
+    public boolean dispatchTouchEvent(@NonNull MotionEvent event) { // hide keyboard and change focus
         if (event.getAction() == MotionEvent.ACTION_UP) {
             View v = getCurrentFocus();
             if ( v instanceof TextInputEditText) {
@@ -105,5 +88,10 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
             super.onBackPressed();
             finishAffinity();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 }

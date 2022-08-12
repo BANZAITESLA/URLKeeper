@@ -41,7 +41,6 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
 
     NoteDao dao = new NoteDao(); // object for crud code
 
-    private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
 
     public UrlManagerAdapter(@NonNull FirebaseRecyclerOptions<UrlNoteData> options) { // constructor adapter
@@ -50,14 +49,14 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
 
     @Override
     protected void onBindViewHolder(@NonNull UrlManagerAdapter.ViewHolder holder, int position, @NonNull UrlNoteData model) {
+        //      firebase authentication initial
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        mCurrentUser = mAuth.getCurrentUser();
+
         holder.title.setText(model.getTitle()); // set title note
         holder.link.setHint(model.getUrl()); // set link note
 
         holder.star_check.setChecked(model.isStar()); // set star
-
-//      firebase authentication initial
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
 
         holder.star_check.setOnClickListener(view -> { // if star clicked
 //          initiate database reference

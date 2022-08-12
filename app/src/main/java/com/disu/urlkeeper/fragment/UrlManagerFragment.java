@@ -1,7 +1,10 @@
 package com.disu.urlkeeper.fragment;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,12 +26,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.concurrent.Executor;
+
 public class UrlManagerFragment extends Fragment {
 
     RecyclerView recyclerViewNoteList;
     UrlManagerAdapter adapter;
-    private FirebaseAuth mAuth;
-    private FirebaseUser mCurrentUser;
 
     public UrlManagerFragment() {}
 
@@ -42,8 +45,8 @@ public class UrlManagerFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_url_manager, container, false);
 
 //      initiate database reference
-        mAuth = FirebaseAuth.getInstance();
-        mCurrentUser = mAuth.getCurrentUser();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser mCurrentUser = mAuth.getCurrentUser();
 
 //      binding & set custom linear layout
         recyclerViewNoteList = view.findViewById(R.id.urlNote_recylerView);
