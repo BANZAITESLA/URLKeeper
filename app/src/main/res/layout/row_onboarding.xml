@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- 11/08/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6 -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginBottom="90dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:padding="20dp">
+
+    <ImageView
+        android:id="@+id/image_Onboard"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/app_name"/>
+
+    <TextView
+        android:id="@+id/title_Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:gravity="center"
+        android:textColor="@color/japan"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineMedium"/>
+
+    <TextView
+        android:id="@+id/desc_Text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/japan90"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>
+
+</LinearLayout>

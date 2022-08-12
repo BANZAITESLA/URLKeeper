@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import com.disu.urlkeeper.R;
 import com.disu.urlkeeper.dao.NoteDao;
+import com.disu.urlkeeper.data.KeyData;
 import com.disu.urlkeeper.data.UrlNoteData;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -34,8 +35,20 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 public class ViewNoteActivity extends AppCompatActivity {
 
@@ -51,6 +64,8 @@ public class ViewNoteActivity extends AppCompatActivity {
     NoteDao dao = new NoteDao();
     private FirebaseAuth mAuth;
     private FirebaseUser mCurrentUser;
+    
+    KeyData key = new KeyData();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,8 +90,9 @@ public class ViewNoteActivity extends AppCompatActivity {
         mCurrentUser = mAuth.getCurrentUser();
 
         id = getIntent().getStringExtra("id");
-
+        
         getData();
+        generateSl();
         copyLink();
         toolbarClicked();
     }
@@ -261,6 +277,65 @@ public class ViewNoteActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
 
+            }
+        });
+    }
+
+    private void generateSl() {
+        shortLink_button.setOnClickListener(view -> {
+            String user_link = link.getText().toString();
+            OkHttpClient client = new OkHttpClient();
+
+            if (!user_link.equals("")) {
+                if (user_link.contains("http")) {
+                    user_link = link.getText().toString();
+                } else {
+                    user_link = "https://" + link.getText().toString();
+                }
+
+                RequestBody body = new FormBody.Builder()
+                        .add("url", user_link)
+                        .build();
+
+                Request request = new Request.Builder()
+                        .url("https://url-shortener-service.p.rapidapi.com/shorten")
+                        .post(body)
+                        .addHeader("content-type", "application/x-www-form-urlencoded")
+                        .addHeader("X-RapidAPI-Key", key.getKey())
+                        .addHeader("X-RapidAPI-Host", "url-shortener-service.p.rapidapi.com")
+                        .build();
+
+                client.newCall(request).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {}
+
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            final String url_response = response.body().string();
+                            ViewNoteActivity.this.runOnUiThread(() -> {
+                                try {
+                                    JSONObject json = new JSONObject(url_response);
+                                    shortLink.setText(json.getString("result_url"));
+                                    shortLink_button.setVisibility(View.GONE);
+                                    shortLink_layout.setVisibility(View.VISIBLE);
+                                    toolbar.getMenu().findItem(R.id.delete_shortLink_view).setEnabled(true).setVisible(true);
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                }
+                            });
+
+                            response.body().close();
+                        } else {
+                            ViewNoteActivity.this.runOnUiThread(() -> Toast.makeText(getApplicationContext(), "Link invalid", Toast.LENGTH_SHORT).show());
+                        }
+                    }
+                });
+            } else {
+                Toast.makeText(getApplicationContext(), "Insert link first", Toast.LENGTH_SHORT).show();
+                shortLink_button.setVisibility(View.VISIBLE);
+                shortLink_layout.setVisibility(View.GONE);
+                toolbar.getMenu().findItem(R.id.delete_shortLink_view).setEnabled(false).setVisible(false);
             }
         });
     }
