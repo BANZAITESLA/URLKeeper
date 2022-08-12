@@ -4,24 +4,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.disu.urlkeeper.R;
-import com.disu.urlkeeper.data.OnboardingData;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.disu.urlkeeper.R;
+import com.disu.urlkeeper.data.OnboardingData;
 
 import java.util.List;
 
 /**
  * 11/08/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6
  */
+
 public class OnboardingAdapter extends RecyclerView.Adapter<OnboardingAdapter.OnboardingViewHolder>{
 
     private List<OnboardingData> onboardingDataList;
 
-    public OnboardingAdapter(List<OnboardingData> onboardingDataList) {
+    public OnboardingAdapter(List<OnboardingData> onboardingDataList) { // constructor adapter
         this.onboardingDataList = onboardingDataList;
     }
 

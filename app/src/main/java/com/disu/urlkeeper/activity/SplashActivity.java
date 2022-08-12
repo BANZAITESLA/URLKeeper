@@ -18,9 +18,6 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-//      set animasi pada splash screen
-        RelativeLayout cons_layout = findViewById(R.id.splash_layout);
-
 //      set delay next activity pada splash screen
         Handler handler = new Handler();
         handler.postDelayed(() -> {

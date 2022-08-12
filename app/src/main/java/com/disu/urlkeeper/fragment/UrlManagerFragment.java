@@ -38,19 +38,23 @@ public class UrlManagerFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_url_manager, container, false);
 
+//      initiate database reference
         mAuth = FirebaseAuth.getInstance();
         mCurrentUser = mAuth.getCurrentUser();
 
+//      binding & set custom linear layout
         recyclerViewNoteList = view.findViewById(R.id.urlNote_recylerView);
         recyclerViewNoteList.setLayoutManager(new CustomLinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
 
+//      get all data for firebase recycler options
         FirebaseRecyclerOptions<UrlNoteData> options = new FirebaseRecyclerOptions.Builder<UrlNoteData>()
                 .setQuery(FirebaseDatabase.getInstance().getReference().child("note").child(mCurrentUser.getUid()), UrlNoteData.class)
                 .build();
 
+//      set adapter
         adapter = new UrlManagerAdapter(options);
         recyclerViewNoteList.setAdapter(adapter);
 
@@ -61,9 +65,10 @@ public class UrlManagerFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        FloatingActionButton add = (FloatingActionButton) getView().findViewById(R.id.addNote_FAB);
-        add.setOnClickListener(view1 -> {
-            Intent intent = new Intent(getActivity(), AddNoteActivity.class);
+
+        FloatingActionButton add = getView().findViewById(R.id.addNote_FAB);
+        add.setOnClickListener(view1 -> { // if FAB clicked
+            Intent intent = new Intent(getActivity(), AddNoteActivity.class); // go to add note activity
             startActivity(intent);
         });
     }
@@ -71,12 +76,12 @@ public class UrlManagerFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        adapter.startListening();
+        adapter.startListening(); // start event listening
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        adapter.stopListening();
+        adapter.stopListening(); // stop event listening
     }
 }

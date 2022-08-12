@@ -1,7 +1,5 @@
 package com.disu.urlkeeper.data;
 
-import java.util.Map;
-
 /**
  * 06/08/2022 | 10119239 | DEA INESIA SRI UTAMI | IF6
  */
