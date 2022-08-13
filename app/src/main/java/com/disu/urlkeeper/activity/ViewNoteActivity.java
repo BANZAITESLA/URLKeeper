@@ -310,7 +310,7 @@ public class ViewNoteActivity extends AppCompatActivity {
                                 shortLink_button.setVisibility(View.VISIBLE); // show 'generate short link'
                                 shortLink_layout.setVisibility(View.GONE); // hide 'short link layout'
                                 Toast.makeText(getApplicationContext(), "Short link removed", Toast.LENGTH_SHORT).show();
-//                                toolbar.getMenu().findItem(R.id.delete_shortLink_view).setEnabled(false).setVisible(false);
+                                toolbar.getMenu().findItem(R.id.delete_shortLink_view).setEnabled(false).setVisible(false);
                             }).addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show()); // show toast
                 }
             }
