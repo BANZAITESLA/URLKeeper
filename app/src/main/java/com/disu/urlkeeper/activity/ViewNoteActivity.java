@@ -109,6 +109,7 @@ public class ViewNoteActivity extends AppCompatActivity {
 //          method to get static data snapshot
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     url = dataSnapshot.getValue(UrlNoteData.class); // object for UrlNoteData
                     String key = dataSnapshot.getKey(); // collect prev node
@@ -218,8 +219,7 @@ public class ViewNoteActivity extends AppCompatActivity {
 //                  processing delete note using removeNote (behavior) from dao (object) for NoteDao (class)
                     dao.removeNote(key)
                             .addOnSuccessListener(success -> {
-                                Toast.makeText(getApplicationContext(), "Note deleted", Toast.LENGTH_SHORT).show();
-                                finish(); }) // back to prev activity
+                                Toast.makeText(getApplicationContext(), "Note deleted", Toast.LENGTH_SHORT).show();}) // back to prev activity
                             .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show());
                 }
             }
@@ -227,6 +227,7 @@ public class ViewNoteActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {}
         });
+        finish();
     }
 
 //  method set star
@@ -308,8 +309,9 @@ public class ViewNoteActivity extends AppCompatActivity {
                             .addOnSuccessListener(success -> {
                                 shortLink_button.setVisibility(View.VISIBLE); // show 'generate short link'
                                 shortLink_layout.setVisibility(View.GONE); // hide 'short link layout'
-                                Toast.makeText(getApplicationContext(), "Short link removed", Toast.LENGTH_SHORT).show(); }) // show toast
-                            .addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show()); // show toast
+                                Toast.makeText(getApplicationContext(), "Short link removed", Toast.LENGTH_SHORT).show();
+//                                toolbar.getMenu().findItem(R.id.delete_shortLink_view).setEnabled(false).setVisible(false);
+                            }).addOnFailureListener(error -> Toast.makeText(getApplicationContext(), "Error : " + error.getMessage(), Toast.LENGTH_LONG).show()); // show toast
                 }
             }
 

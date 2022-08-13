@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +20,7 @@ import com.disu.urlkeeper.dao.NoteDao;
 import com.disu.urlkeeper.data.UrlNoteData;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -40,7 +42,6 @@ public class UrlManagerAdapter extends FirebaseRecyclerAdapter<UrlNoteData, UrlM
     UrlNoteData url;
 
     NoteDao dao = new NoteDao(); // object for crud code
-
     private FirebaseUser mCurrentUser;
 
     public UrlManagerAdapter(@NonNull FirebaseRecyclerOptions<UrlNoteData> options) { // constructor adapter

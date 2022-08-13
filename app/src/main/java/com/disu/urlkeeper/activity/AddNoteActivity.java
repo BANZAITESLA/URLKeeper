@@ -105,6 +105,9 @@ public class AddNoteActivity extends AppCompatActivity {
                 title_layout.setErrorEnabled(false);
                 link_layout.setErrorEnabled(false);
 
+                shortLink_layout.setVisibility(View.GONE);
+                shortLink_button.setVisibility(View.VISIBLE);
+
             } else { // if title & link is not filled yet
                 if (!title.getText().toString().equals("")) { // if title filled, turn text-field setError false
                     title_layout.setErrorEnabled(false);

@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements NavigationBarView
     }
 
     @Override // hide keyboard and change focus
-    public boolean dispatchTouchEvent(@NonNull MotionEvent event) { // hide keyboard and change focus
+    public boolean dispatchTouchEvent(@NonNull MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_UP) {
             View v = getCurrentFocus();
             if ( v instanceof TextInputEditText) {
